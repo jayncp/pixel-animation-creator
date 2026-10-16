@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "action": "example_not_a_fixed_motion_recipe",
+  "canvas": [64, 64],
+  "loop": true,
+  "binary_alpha": true,
+  "frames": [
+    {"path": "frames/frame_000.png", "duration_ms": 120, "anchors": {"pelvis": [32, 40], "wrist": [40, 32], "tail_root": [30, 42], "tail_tip": [18, 44]}},
+    {"path": "frames/frame_001.png", "duration_ms": 80, "anchors": {"pelvis": [32, 40], "wrist": [42, 31], "tail_root": [30, 42], "tail_tip": [16, 43]}}
+  ]
+}
