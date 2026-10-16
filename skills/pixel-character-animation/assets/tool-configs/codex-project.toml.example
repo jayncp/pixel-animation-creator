@@ -1,0 +1,12 @@
+# INACTIVE TEMPLATE. Substitute every placeholder with verified absolute paths.
+# Merge into this project's .codex/config.toml only after permission/trust checks.
+# Do not install globally or overwrite unrelated settings. No credentials here.
+[mcp_servers.aseprite]
+command = "<ABSOLUTE_NODE_EXECUTABLE>"
+args = ["<ABSOLUTE_PROJECT>/tools/aseprite-mcp/build/index.js"]
+cwd = "<ABSOLUTE_PROJECT>"
+[mcp_servers.aseprite.env]
+ASEPRITE_PATH = "<ABSOLUTE_ASEPRITE_EXECUTABLE>"
+XDG_CONFIG_HOME = "<ABSOLUTE_PROJECT>/.local/config"
+TMPDIR = "<ABSOLUTE_PROJECT>/.local/tmp"
+MCP_TRANSPORT = "stdio"

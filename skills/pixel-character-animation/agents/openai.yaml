@@ -1,4 +1,4 @@
 interface:
   display_name: "Pixel Character Animation"
-  short_description: "Reference-led motion with clean temporal pixel edges"
-  default_prompt: "Use $pixel-character-animation with my reference or project pack to create or refine the requested animation and verify the final files."
+  short_description: "Full-pipeline pixel art and animation, from any stage"
+  default_prompt: "Use $pixel-character-animation to create or continue my pixel character project from the supplied stage, preserving identity and verifying the requested outputs."

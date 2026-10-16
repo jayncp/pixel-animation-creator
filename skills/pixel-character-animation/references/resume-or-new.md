@@ -30,7 +30,7 @@ For the companion study specifically, the latest revision may improve edges with
 
 Use the supplied reference, not the companion character's images. Extract identity before choosing an action or rig. Avoid inheriting a study's species, sex, clothing, appendage count, dimensions, palette size, or frame count.
 
-Establish a front or reference-matching master, working scale, ground plane, pivot/foot anchors, and a small palette. Design missing angles only if the action needs them. Inspect full-body views plus face/footwear close-ups. Confirm that opposite views do not quietly change shoe straps, iris color, hair ornaments, hem length, or limb proportions.
+Establish a front or reference-matching master, a 256×256 canvas for a new unspecified project (user dimensions override; preserve existing project dimensions), ground plane, pivot/foot anchors, and a purposeful palette. For a complete new reference set without specified angles, use front, three-quarter, side and back; for a continuation or subset request, add only the needed missing angles. Inspect full-body views plus face/footwear close-ups. Confirm that opposite views do not quietly change shoe straps, iris color, hair ornaments, hem length, or limb proportions.
 
 If the source is a high-resolution painting, first make a deliberate pixel design rather than nearest-neighbor shrinking a noisy raster and calling it finished. If using image generation, use source-guided generation with tools and permissions available in the current environment; inspect and refine the results. Do not hallucinate successful generation, seed control, or native edits.
 

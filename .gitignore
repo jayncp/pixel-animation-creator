@@ -1,0 +1,16 @@
+.venv/
+.local/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+node_modules/
+tools/
+output/
+scratch/
+*.zip
+*.log
+.codex/config.toml
+.mcp.json
+.DS_Store

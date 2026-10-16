@@ -9,6 +9,8 @@
 
 Separate written judgments. “Technical checks pass; sleeve motion still feels rigid at 1.1–1.4 seconds” is useful. “All checks pass, 95% natural” is not.
 
+Inspect every authored frame against the accepted identity/reference set before final acceptance. Use a frame review log or checked frame ranges; investigate all flagged areas and view transitions, not only selected attractive frames. A contact sheet can cover the set, but face/footwear/overlap details may need individual crops.
+
 ## Edge cleanup is local and temporal
 
 Inspect against checkerboard, light, and dark backgrounds at native size and integer nearest-neighbor zoom. Test actual alpha, not the viewer's checkerboard illusion. For deliberately crisp sprites, preserve binary transparency. Allow a different alpha policy only if the art brief actually calls for it.

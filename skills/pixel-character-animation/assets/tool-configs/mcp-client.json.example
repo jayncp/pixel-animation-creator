@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "aseprite": {
+      "command": "<ABSOLUTE_NODE_EXECUTABLE>",
+      "args": ["<ABSOLUTE_PROJECT>/tools/aseprite-mcp/build/index.js"],
+      "env": {
+        "ASEPRITE_PATH": "<ABSOLUTE_ASEPRITE_EXECUTABLE>",
+        "XDG_CONFIG_HOME": "<ABSOLUTE_PROJECT>/.local/config",
+        "TMPDIR": "<ABSOLUTE_PROJECT>/.local/tmp",
+        "MCP_TRANSPORT": "stdio"
+      }
+    }
+  }
+}

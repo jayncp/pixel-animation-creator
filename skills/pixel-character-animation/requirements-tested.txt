@@ -1,0 +1,3 @@
+# Exact version observed in the 2026-10-16 validation environment.
+# Supported runtime range remains in requirements.txt; other versions require testing.
+Pillow==12.3.0

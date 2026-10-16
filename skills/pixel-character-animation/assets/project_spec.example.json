@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "input_type": "text",
+  "canvas": {
+    "width": 256,
+    "height": 256
+  },
+  "entry_stage": "intake",
+  "scope": {
+    "request": "Replace with the requested character, action, or scoped repair.",
+    "preserve": [],
+    "excluded": []
+  },
+  "inputs": [],
+  "identity_spec": {
+    "status": "pending",
+    "recognizable_features": [],
+    "palette": [],
+    "proportions": {},
+    "appendage_count": null,
+    "must_preserve": []
+  },
+  "reference_views": [],
+  "motion_research": [],
+  "timing_events": [],
+  "acceptance_notes": [],
+  "stages": {
+    "intake": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "design": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "views": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "research": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "blocking": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "animation": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "cleanup": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    },
+    "delivery": {
+      "status": "pending",
+      "artifacts": [],
+      "gates": {
+        "technical": {
+          "status": "pending",
+          "evidence": []
+        },
+        "visual": {
+          "status": "pending",
+          "evidence": []
+        }
+      }
+    }
+  },
+  "notes": [
+    "Template only: no artwork, technical audit, visual review, or user acceptance has occurred.",
+    "Record actual existing files and evidence before marking any stage or gate passed."
+  ]
+}
