@@ -26,7 +26,7 @@ Run `python scripts/package_repo.py /absolute/path/to/release.zip` from this rep
 
 Extract into a new directory. Run `git status --short`, `git log --oneline`, `git fsck --full`, all tests and repository validation. Verify the ZIP entry names contain no absolute or parent traversal paths and record its SHA-256. Keep ZIP/hash outside the tracked tree to avoid self-referential manifests.
 
-ZIP preserves necessary Git object bytes; platform extraction behavior can vary. Use an archiver that extracts hidden `.git` entries. The release's Git identity is a local non-personal author label; no remote repository is configured or published.
+ZIP preserves necessary Git object bytes; platform extraction behavior can vary. Use an archiver that extracts hidden `.git` entries. The first three commits use a local non-personal author label; later commits use the maintainer's own Git identity. The source remote is https://github.com/jayncp/pixel-animation-creator; the packaged ZIP does not carry remote configuration.
 
 ## Coverage boundaries
 

@@ -6,14 +6,16 @@ Read only when selecting or configuring tools. Capability checks do not authoriz
 
 1. Prefer the current host's **available native image-generation tool** for raster character references, views, and pose guides. Inspect its actual schema; tool names/arguments differ by host. Inspect edit inputs, request real alpha when supported, copy selected outputs into the project, and log provenance. Generated guides are not automatically a temporally consistent animation.
 2. Honor an explicitly selected provider/model. Confirm its actual image-generation/edit/alpha capabilities, credential readiness, data destination and spending authorization. Never silently substitute a provider/model, upload private references, or ask for secrets in chat.
-3. On another agent, detect an existing Codex installation without inference calls: `command -v codex`, `codex --version`, `codex --help`, `codex exec --help`. Installation, login, image-input flags and model names do **not** prove imagegen access or free usage. Do not install Codex just to probe it.
-4. Codex orchestration is optional only after the selected session's actual imagegen capability and authorization are established. The shape below is documented/help-verified, **not generation-tested**. It may consume usage; do not use it as a free capability probe. Replace placeholders and inspect local help first:
+3. On another agent, detect an existing Codex installation without inference calls: `command -v codex`, `codex --version`, `codex --help`, `codex exec --help`; if `command -v` fails, also check for an app-bundled CLI, and `codex features list` is a read-only feature-flag probe. Installation, login, image-input flags and model names do **not** prove imagegen access or free usage. Do not install Codex just to probe it.
+4. Codex orchestration is optional only after the selected session's actual imagegen capability and authorization are established. The shape below generated images in one field test (see repository docs/VALIDATION.md). It may consume usage; do not use it as a free capability probe. Replace placeholders and inspect local help first:
 
 ```sh
-codex exec --cd "$PROJECT" --sandbox workspace-write --ephemeral --json \
-  --output-last-message "$PROJECT/logs/imagegen-result.txt" \
-  "Use the available native image-generation tool for the approved brief. Save selected assets inside this project. Do not install, change provider, invoke a paid fallback, or change global config. If imagegen is absent, report unavailable."
+codex exec --cd "$PROJECT" --sandbox workspace-write --skip-git-repo-check --json \
+  --output-last-message "$PROJECT/logs/imagegen-result.txt" -i "$PROJECT/refs/master_preview.png" -- \
+  "Use the available native image-generation tool for the approved brief. Copy the selected image byte-for-byte into this project. Do not install, change provider, invoke a paid fallback, or change global config. If imagegen is absent, report unavailable." < /dev/null
 ```
+
+`-i` attaches a reference image; drop it for text-only briefs. Without `< /dev/null` the command can wait on stdin. Generated files land under the Codex home directory, outside the project, hence the copy; output may be RGB without alpha at a size the model chooses.
 
 No dedicated `codex image generate` command or direct Codex image endpoint was established. Never invent commands, feature toggles, endpoints, or extract authentication tokens. Do not bypass sandbox/approval rules. If no route is verified, ask for a provider or supplied images and continue independent planning/local work.
 
@@ -74,6 +76,7 @@ blender --background --factory-startup --disable-autoexec \
 - **Live discovery only:** Codex 0.159.2 help/version; Blender 4.3.2 help/version; Aseprite 1.3.18.6-dev version with project-local XDG config. No generation/render was performed in adapter research.
 - **Dry-run:** installed host imagegen adapter generated a request preview without API credentials or a paid call. Not evidence of account/model access.
 - **Historical project results:** the named Aseprite edit/export tools succeeded; Blender armature/projection scripts produced validation artifacts. These do not mean MCP generated the character or Blender rendered every final pixel.
-- **Documented/template only:** new project configs, setup patterns and optional Codex orchestration above. Verify in the destination environment before declaring them operational.
+- **Live generation (2026-10-16):** the Codex command shape above, through an app-bundled CLI; the result applies to that account, version and host only.
+- **Documented/template only:** new project configs and setup patterns above. Verify in the destination environment before declaring them operational.
 
 Record actual route, executable version, source revision, input/output hashes, alpha/dimensions and validation level. Exclude secrets from manifests and logs.

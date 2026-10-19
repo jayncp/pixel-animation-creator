@@ -15,7 +15,7 @@ Choose sufficient key poses to read the action without effects. Plan support-foo
 Typical choices, not universal recipes:
 
 - Idle: asymmetric breathing/settling, small regional motion, stable feet, delayed hair/cloth. Do not scale the whole body. A single repeating GIF with one blink repeats that blink every cycle; do not claim it is random or independent. Use a longer authored cycle or runtime state machine if nonperiodic behavior is actually requested.
-- Projectile: readable gathering or aim where appropriate, concentrated proximal drive, fast release, brief extension, delayed sleeve motion, longer recovery. The projectile separates at an explicit release event and is no longer attached to the hand afterward.
+- Projectile: readable gathering or aim where appropriate, concentrated proximal drive, fast release, brief extension, delayed sleeve motion, longer recovery. The projectile separates at an explicit release event and is no longer attached to the hand afterward; it then keeps its own spacing, so during body holds add effect-only frames instead of freezing it.
 - Barrier/support: a distinct opening accent followed by believable sustained support and small adjustments, not the projectile action in slow motion.
 - Turn/whip: gaze can lead; torso/pelvis rotate and transfer support; hair/tails trail. Add genuinely drawn transition views or local contour transitions where view-card changes pop.
 
@@ -34,6 +34,10 @@ For tails, long hair, ribbons, capes, or cables, retain branch identity and cont
 Root-connected pixels can still encode a teleporting or swapped tail. A union centroid can hide two branches exchanging positions. Use named per-branch tracks, curve overlays, actual tip clusters, and a global review. Do not infer continuity from one fixed troublesome pair or a successful nearest-neighbor matching alone.
 
 Depth order must change coherently. When a branch goes behind the body, record its hidden trajectory rather than shortening or reassigning it. Do not “repair” a true source-segmentation fragment by incorrectly changing the real tail path.
+
+## Cut-out layers
+
+Moving parts of a finished sprite exposes pixels the source never drew. Underpaint each movable part's hidden area, and offset a child part only in directions that keep its joint overlapped (a head lagging upward tears the neck open). Recheck the composite's hole report after each layer change.
 
 ## Cloth and far-arm geometry
 

@@ -123,6 +123,62 @@ class PixelAnimationTest(unittest.TestCase):
             pa.dump(self.manifest, self.doc)
             with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
 
+    def test_symlinked_library_root_is_resolved(self):
+        # Library callers may pass an unresolved root (macOS temp dirs live under the
+        # /var -> /private/var symlink); containment must compare resolved paths.
+        with tempfile.TemporaryDirectory() as other:
+            alias = Path(other) / "alias"
+            alias.symlink_to(self.root, target_is_directory=True)
+            doc, frames, _ = pa.load_manifest(alias / "action.json")
+            self.assertTrue(pa.audit(doc, frames, alias)["technical_pass"])
+            with self.assertRaises(ValueError): pa.asset(alias, "../outside.png")
+
+    def test_enclosed_holes_reported_and_declared_gaps(self):
+        ring = Image.new("RGBA", (8, 8))
+        ImageDraw.Draw(ring).rectangle((1, 1, 5, 5), fill=(40, 50, 60, 255))
+        ring.putpixel((3, 3), (0, 0, 0, 0))
+        # closed only by a diagonal step: still enclosed for 4-connected background
+        for p in ((6, 6), (7, 6), (6, 7)): ring.putpixel(p, (40, 50, 60, 255))
+        holes = pa.hole_records(pa.enclosed_holes(ring), 8)
+        self.assertEqual([h["pixels"] for h in holes], [1])
+        self.assertEqual(holes[0]["bbox"], [3, 3, 4, 4])
+        open_edge = ring.copy()
+        open_edge.putpixel((3, 1), (0, 0, 0, 0))
+        open_edge.putpixel((3, 2), (0, 0, 0, 0))
+        self.assertEqual(pa.enclosed_holes(open_edge), [])
+        self.frames = [ring] * 4
+        self.write(self.root, self.doc, self.frames)
+        result = pa.audit(self.doc, self.frames, self.root)
+        self.assertTrue(result["technical_pass"])
+        self.assertEqual(result["frames_with_undeclared_holes"], [0, 1, 2, 3])
+        self.assertTrue(any("enclosed transparent" in w for w in result["warnings"]))
+        for entry in self.doc["frames"]: entry["design_gaps"] = [[3, 3]]
+        result = pa.audit(self.doc, self.frames, self.root)
+        self.assertEqual(result["frames_with_undeclared_holes"], [])
+        self.assertTrue(result["frames"][0]["enclosed_holes"][0]["declared"])
+        self.doc["frames"][0]["design_gaps"] = [[3.5, 3]]
+        pa.dump(self.manifest, self.doc)
+        with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
+
+    def test_edge_diff_pairs_frames_by_time_after_inserting_a_frame(self):
+        before = {"frames": [{"duration_ms": 100}, {"duration_ms": 100}]}
+        after = {"frames": [{"duration_ms": 100}, {"duration_ms": 40}, {"duration_ms": 60}]}
+        solid = Image.new("RGBA", (8, 8))
+        ImageDraw.Draw(solid).rectangle((1, 1, 5, 5), fill=(40, 50, 60, 255))
+        holed = solid.copy()
+        holed.putpixel((3, 3), (0, 0, 0, 0))
+        result = pa.edge_diff(before, [solid, solid], after, [solid, solid, holed])
+        self.assertFalse(result["same_timing"])
+        self.assertEqual([(r["start_ms"], r["duration_ms"], r["before_frame"], r["after_frame"]) for r in result["frames"]],
+                         [(0, 100, 0, 0), (100, 40, 1, 1), (140, 60, 1, 2)])
+        self.assertEqual(result["frames"][2]["new_enclosed_holes"][0]["pixels"], 1)
+        self.assertEqual(result["frames_needing_junction_review"], [2])
+        after["frames"][2]["design_gaps"] = [[3, 3]]
+        self.assertFalse(pa.edge_diff(before, [solid, solid], after, [solid, solid, solid])["frames_needing_junction_review"])
+        self.assertTrue(pa.edge_diff(before, [solid, solid], before, [solid, solid])["same_timing"])
+        with self.assertRaises(ValueError):
+            pa.edge_diff(before, [solid, solid], {"frames": [{"duration_ms": 150}]}, [solid])
+
     def test_nonbinary_alpha_audit_and_gif_rejected(self):
         self.frames[0].putpixel((0, 0), (10, 20, 30, 128))
         self.write(self.root, self.doc, self.frames)

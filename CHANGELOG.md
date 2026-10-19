@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.0 — 2026-10-19
+
+From a field test (96×96 pixel character → 256 views → spell-cast animation) and the owner's review; streamlined after a survey of comparable image/sprite skills.
+
+- Fix path containment when a library caller passes an unresolved manifest root (two tests failed on macOS).
+- `audit` reports each frame's enclosed transparent regions; frames may declare intentional `design_gaps`.
+- `edge-diff` pairs frames by time interval, so inserted or retimed frames can be compared, and reports new holes.
+- Rules: check discrete identity facts (counts, sides, presence) per view; a fresh independent reviewer before a candidate, at most three rounds; honest playback wording for still-only agents; cut-out underpaint and overlapping joints; effect timing independent of body holds; near/far side logging; guide-to-grid conversion and noninteger size routes.
+- Codex adapter: app-bundled CLI discovery and the field-tested command shape.
+
 ## 2.0.0 — 2026-10-16
 
 - Reposition as end-to-end pixel-character design and animation from text, ordinary images, pixel references or any existing stage.

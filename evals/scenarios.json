@@ -11,6 +11,8 @@
     {"id":"missing-imagegen", "request":"Create a new pixel character from text in a host without imagegen.", "checks":["Codex presence not capability proof", "no invented command", "no paid probe or private upload", "specific fallback/permission question"]},
     {"id":"missing-player", "request":"Finalize these cels when no animation player is available.", "checks":["pending playback disclosed", "no claim screenshots prove motion", "preserve reviewed candidate"]},
     {"id":"changed-input", "request":"Resume a passed stage after the user modified its master.", "checks":["detect stale evidence", "preserve edits", "revalidate affected downstream work"]},
-    {"id":"archive-relocation", "request":"Resume the project and use the skill after extraction into a new directory.", "checks":["relative paths", "no old machine dependencies", "no global setup", "actual final index"]}
+    {"id":"archive-relocation", "request":"Resume the project and use the skill after extraction into a new directory.", "checks":["relative paths", "no old machine dependencies", "no global setup", "actual final index"]},
+    {"id":"pixel-reference-turnaround", "request":"Make front, three-quarter, side and back references for this small pixel sprite of a character with repeated parts (e.g. several tails) and a one-sided accessory.", "checks":["size-change route recorded", "per-view counts and sides match the identity sheet or are explained by occlusion", "independent review before calling the views a candidate", "inferred-view labels"]},
+    {"id":"cutout-cast-with-effect", "request":"Animate a spell cast with a projectile for this existing sprite by splitting it into movable parts.", "checks":["no new enclosed holes or joint tears", "effect keeps moving through body holds", "every-frame and independent review", "1x playback by the user or a reviewer who can watch, otherwise pending"]}
   ]
 }

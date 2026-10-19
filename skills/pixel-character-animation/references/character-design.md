@@ -21,7 +21,7 @@ Do not squeeze aspect ratio to fit. Use an intentional crop only when allowed, o
 
 ### Pixel reference image
 
-Identify the logical grid: a 1024 image may be a 4× display of 256 art. Recover it without interpolation if exact integer expansion is confirmed. If the native reference already meets the target, keep its pixels except requested improvements. Integer nearest-neighbor upscale preserves source clusters but does not add authored detail; label it as such. Noninteger size changes need local contour/feature re-authoring rather than blurry resampling. Keep the original available for side-by-side checks.
+Identify the logical grid: a 1024 image may be a 4× display of 256 art. Recover it without interpolation if exact integer expansion is confirmed. If the native reference already meets the target, keep its pixels except requested improvements. Integer nearest-neighbor upscale preserves source clusters but does not add authored detail; label it as such. Noninteger size changes need local contour/feature re-authoring rather than blurry resampling; a faithful alternative keeps the source density on an integer-related logical canvas (e.g. 96 → 128) and enlarges with a color-preserving 2× such as Scale2x. Record which route was taken. Keep the original available for side-by-side checks.
 
 ## Identity sheet
 
@@ -31,7 +31,7 @@ Record observed facts and deliberate decisions separately:
 - face/eye shape, iris/highlights where readable, expression, hair/ear construction;
 - garment seams, sleeve volume, hems, socks/skin bands, shoe straps and soles;
 - accessories and attachment points, asymmetry/handedness;
-- appendage count, branch identity, root locations and tip shapes;
+- appendage count (as a number), branch identity, root locations and tip shapes;
 - palette roles, outline, internal shading/AA and light convention.
 
 Do not force human anatomy onto a creature. If the design has no feet or face, mark those checks not applicable with a reason.
@@ -40,9 +40,9 @@ Do not force human anatomy onto a creature. If the design has no feet or face, m
 
 For a full reference-set request with unspecified views, use front, three-quarter, side, back as an explicit default. Match the supplied camera if it is intentionally top-down or isometric; do not turn a top-down game into orthographic side-view art. A subset request overrides the default. For animation continuation only, add missing views needed by the action instead of replacing an accepted set.
 
-Derive each view from the locked master and identity sheet; use image generation as an aid when available. Unseen surfaces are inferred designs, not recovered ground truth. Simple mirroring is acceptable only for suitably symmetric features and must be labeled. Hair parting, buckles, weapon hands and asymmetric shoes may need new drawing. A horizontal flip is not evidence of an independently coherent opposite view.
+Derive each view from the locked master and identity sheet; use image generation as an aid when available. Unseen surfaces are inferred designs, not recovered ground truth. Simple mirroring is acceptable only for suitably symmetric features and must be labeled. Hair parting, buckles, weapon hands and asymmetric shoes may need new drawing. A horizontal flip is not evidence of an independently coherent opposite view. Place asymmetric parts by the character's own sides: log per view which side faces the camera (a figure facing image right shows its right side). To bring a generated guide onto the grid, take scale from body landmarks shared with the master rather than its bounding box and map each block's center to the most common locked-palette color, never an average; expect drifting pixel pitch and changed proportions.
 
-Compare views in a same-scale panel with a landmark matrix: head height, eyes, shoulders, pelvis, knees, feet, accessory roots and tail roots. Check volume, perspective and depth order rather than demanding equal projected widths. Face and footwear need close-up review. Mark differences as valid perspective/occlusion, intentional asymmetry, or an unresolved conflict. Reconcile conflicts before reusing the view for cels.
+Compare views in a same-scale panel with a landmark matrix: head height, eyes, shoulders, pelvis, knees, feet, accessory roots and tail roots, plus a row per view for each count/side/presence fact. A repeat missing from one view must be explained by occlusion; generators often merge overlapping repeats. Check volume, perspective and depth order rather than demanding equal projected widths. Face and footwear need close-up review. Mark differences as valid perspective/occlusion, intentional asymmetry, or an unresolved conflict. Reconcile conflicts before reusing the view for cels.
 
 ## Gate and deliverables
 

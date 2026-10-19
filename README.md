@@ -1,6 +1,6 @@
 # 全流程像素角色动画 Skill
 
-版本：2.0.0。可从文字、普通参考图、像素参考图，或已经完成的任意制作阶段接入。
+版本：2.1.0。可从文字、普通参考图、像素参考图，或已经完成的任意制作阶段接入。
 
 本仓库交付的是可维护的制作技能与验证工具，不是专用训练模型，也不保证一次生成即达到最终质量。它要求执行 agent 自主研究、制作、看图/播放、发现问题、修复并再验收。原有角色素材不打包进通用 skill；可同时提供先前的项目压缩包继续那个角色。
 
@@ -53,4 +53,4 @@ python3 -m venv .venv
 
 Windows 可用 `.venv\Scripts\python.exe`。不需要全局 pip、sudo、全局 MCP 注册或 shell 配置修改。已有满足要求的环境可直接运行，不必重复安装。
 
-详见 [维护与发布](docs/MAINTAINING.md)、[验证结果](docs/VALIDATION.md) 与 [变更记录](CHANGELOG.md)。没有发布到 GitHub，也没有安装到你的账号。
+详见 [维护与发布](docs/MAINTAINING.md)、[验证结果](docs/VALIDATION.md) 与 [变更记录](CHANGELOG.md)。源码仓库：<https://github.com/jayncp/pixel-animation-creator>。skill 不会安装到你的账号。

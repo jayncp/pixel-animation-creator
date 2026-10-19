@@ -1,9 +1,9 @@
-# Test results — 2026-10-16
+# Test results — 2026-10-19
 
-Python3.12.14, Pillow12.3.0. All40 tests passed:19 pixel_anim tests and21 project_stage tests. ImageMagick was available and its independent-decoder regression ran; no skipped tests. Declared Python3.10+/Pillow10–12 support is not a claim every version was tested.
+macOS 26.0.1 arm64, Python3.12.12, Pillow12.3.0, ImageMagick7.1.2 available. All43 tests passed: 22 pixel_anim tests and 21 project_stage tests; none skipped. Declared Python3.10+/Pillow10–12 support is not a claim every version or OS was tested.
 
-Tests cover exact GIF/sheet pixels and time intervals, full-canvas descriptors, duplicate holds, transparency clearing, palette/timing refusal, path safety, relocation/no-overwrite, corrupted exports, multilayer bridge/pinhole fixtures,256 default/user override, old-project canvas preservation, any-stage/imported routing, required recorded reviews, stale/missing output hashes, stale declared inputs, stage input snapshots and strict schema version.
+On 2026-10-16 (Python3.12.14, Pillow12.3.0) 40 tests passed on another platform; on macOS two of them failed because a library call compared an unresolved temporary root (`/var` → `/private/var`) with resolved asset paths. That is fixed and covered by a platform-independent symlinked-root test.
 
-Independent behavior review found and fixed four stage-helper defects before release. The40-test suite is technical evidence, not a naturalness score. A real30-frame/3000ms prior idle export was exact. A fresh text-based robot generation test produced a recognizable256 candidate but failed the clean-pixel gate; it is not advertised as completed pixel art.
+Tests cover exact GIF/sheet pixels and time intervals, full-canvas descriptors, duplicate holds, transparency clearing, palette/timing refusal, path safety, relocation/no-overwrite, corrupted exports, multilayer bridge/pinhole fixtures, enclosed holes with declared design gaps, time-aligned edge comparison, 256 default/user override, old-project canvas preservation, any-stage/imported routing, required recorded reviews, stale/missing output hashes, stale declared inputs, stage input snapshots and strict schema version.
 
-Actual image/player inspection remains necessary. See repository docs/VALIDATION.md for scope, independent review and release extraction checks; copied-alone skill users can rerun the bundled tests.
+The suite is technical evidence, not a naturalness score. Actual image/player inspection remains necessary. See repository docs/VALIDATION.md for scope and field-test results; copied-alone skill users can rerun the bundled tests.

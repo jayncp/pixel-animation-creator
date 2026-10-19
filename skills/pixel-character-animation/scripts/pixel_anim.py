@@ -24,6 +24,7 @@ def sha(path):
 def asset(root, name):
     if not isinstance(name, str) or not name or "\\" in name or ":" in name or Path(name).is_absolute():
         raise ValueError(f"Asset path must be a nonempty relative path: {name!r}")
+    root = Path(root).resolve()  # e.g. macOS /var -> /private/var; compare resolved paths only
     path = (root / name).resolve()
     if not path.is_relative_to(root):
         raise ValueError(f"Asset path escapes manifest root: {name}")
@@ -65,6 +66,9 @@ def load_manifest(path):
         for name, xy in entry.get("anchors", {}).items():
             if not isinstance(xy, list) or len(xy) != 2 or any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in xy):
                 raise ValueError(f"Frame {i} anchor {name}: expected two finite coordinates")
+        gaps = entry.get("design_gaps", [])
+        if not isinstance(gaps, list) or any(not isinstance(xy, list) or len(xy) != 2 or any(type(v) is not int for v in xy) for xy in gaps):
+            raise ValueError(f"Frame {i} design_gaps must be an array of [x, y] integer pixels")
         frames.append(im)
     size = frames[0].size
     if any(im.size != size for im in frames):
@@ -111,6 +115,53 @@ def components(im, neighbors=8):
                         todo.append(j)
         result.append(points)
     return sorted(result, key=len, reverse=True)
+
+
+def enclosed_holes(im):
+    """Transparent 4-connected regions that cannot reach the canvas border.
+
+    Background uses 4-connectivity (the complement of 8-connected art), so a gap
+    closed only by a diagonal outline step still counts as enclosed.
+    """
+    w, h = im.size
+    alpha = list(pixels(im.getchannel("A")))
+    state = bytearray(w * h)  # 1 = reaches the border, 2 = assigned to a hole
+
+    def neighbors(i):
+        x, y = i % w, i // w
+        if x > 0: yield i - 1
+        if x < w - 1: yield i + 1
+        if y > 0: yield i - w
+        if y < h - 1: yield i + w
+
+    def flood(start, mark):
+        state[start] = mark
+        todo, points = [start], []
+        while todo:
+            i = todo.pop()
+            points.append(i)
+            for j in neighbors(i):
+                if not alpha[j] and not state[j]:
+                    state[j] = mark
+                    todo.append(j)
+        return points
+
+    for i in [*range(w), *range(w * (h - 1), w * h), *range(0, w * h, w), *range(w - 1, w * h, w)]:
+        if not alpha[i] and not state[i]:
+            flood(i, 1)
+    holes = [flood(i, 2) for i in range(w * h) if not alpha[i] and not state[i]]
+    return sorted(holes, key=len, reverse=True)
+
+
+def hole_records(holes, width, gaps=()):
+    """Summaries; a hole containing a declared design-gap pixel is marked declared."""
+    declared = {y * width + x for x, y in gaps}
+    rows = []
+    for points in holes:
+        xs, ys = [p % width for p in points], [p // width for p in points]
+        rows.append({"pixels": len(points), "bbox": [min(xs), min(ys), max(xs) + 1, max(ys) + 1],
+                     "declared": not declared.isdisjoint(points)})
+    return rows
 
 
 def track_report(doc):
@@ -167,8 +218,14 @@ def audit(doc, frames, root):
         else:
             runs.append({"first_frame": i, "last_frame": i, "start_ms": t, "duration_ms": d})
         previous = vb
+        holes = hole_records(enclosed_holes(im), im.width, entry.get("design_gaps", []))
+        undeclared = [hole for hole in holes if not hole["declared"]]
+        if undeclared:
+            warnings.append(f"Frame {i} has {len(undeclared)} undeclared enclosed transparent region(s), "
+                            f"{sum(hole['pixels'] for hole in undeclared)} px; inspect for pinholes")
         records.append({"frame": i, "path": entry["path"], "sha256": sha(asset(root, entry["path"])),
-                        "duration_ms": d, "start_ms": t, "bbox": im.getbbox(), "alpha_values": alphas})
+                        "duration_ms": d, "start_ms": t, "bbox": im.getbbox(), "alpha_values": alphas,
+                        "enclosed_holes": holes})
         t += d
     if len(colors) > 255:
         warnings.append(f"{len(colors)} visible colors exceed this helper's 255-color transparent GIF limit; PNG/sheet remain lossless")
@@ -203,8 +260,10 @@ def audit(doc, frames, root):
             "authored_frames": len(frames), "duration_ms": t, "visible_rgb_colors": len(colors),
             "effective_exact_pose_holds": runs, "loop_requested": bool(doc.get("loop", False)),
             "first_last_visible_equal": visual_bytes(frames[0]) == visual_bytes(frames[-1]),
+            "frames_with_undeclared_holes": [r["frame"] for r in records if any(not h["declared"] for h in r["enclosed_holes"])],
             "frames": records, "timing": track_report(doc), "topology": topology,
-            "topology_note": "Component/root statistics are diagnostics, not permission to delete small clusters. A connected root does not prove tip continuity."}
+            "topology_note": "Component/root statistics are diagnostics, not permission to delete small clusters. A connected root does not prove tip continuity.",
+            "holes_note": "Enclosed transparent regions are composited-frame proposals: real pinholes or intentional design gaps (declare those per frame as design_gaps). Never fill or delete automatically."}
 
 
 def matte(im, background=(44, 48, 56)):
@@ -340,6 +399,25 @@ def write_full_canvas_gif(indexed, durations, path, loop):
     return structure
 
 
+def intervals(a, b):
+    """Union of two exposure lists' time boundaries: (start_ms, dt_ms, index_a, index_b)."""
+    if sum(a) != sum(b):
+        raise ValueError(f"Duration mismatch: {sum(a)} != {sum(b)}")
+    rows, i, j, t = [], 0, 0, 0
+    remain_a, remain_b = a[0], b[0]
+    while i < len(a) and j < len(b):
+        dt = min(remain_a, remain_b)
+        rows.append((t, dt, i, j))
+        t, remain_a, remain_b = t + dt, remain_a - dt, remain_b - dt
+        if remain_a == 0:
+            i += 1
+            if i < len(a): remain_a = a[i]
+        if remain_b == 0:
+            j += 1
+            if j < len(b): remain_b = b[j]
+    return rows
+
+
 def verify_gif(doc, frames, path):
     encoded, durations = [], []
     with Image.open(path) as gif:
@@ -355,27 +433,13 @@ def verify_gif(doc, frames, path):
         raise ValueError(f"GIF duration mismatch: {sum(durations)} != {sum(expected)}")
     if any(d <= 0 for d in durations):
         raise ValueError("Decoded GIF has nonpositive exposure")
-    i = j = 0
-    remain_a, remain_b = expected[0], durations[0]
-    intervals = 0
-    while i < len(frames) and j < len(encoded):
+    rows = intervals(expected, durations)
+    for _, _, i, j in rows:
         if frames[i].size != encoded[j].size or visual_bytes(frames[i]) != visual_bytes(encoded[j]):
             raise ValueError(f"Decoded GIF pixel mismatch: source frame {i}, encoded frame {j}")
-        dt = min(remain_a, remain_b)
-        remain_a -= dt
-        remain_b -= dt
-        intervals += 1
-        if remain_a == 0:
-            i += 1
-            if i < len(frames): remain_a = expected[i]
-        if remain_b == 0:
-            j += 1
-            if j < len(encoded): remain_b = durations[j]
-    if i != len(frames) or j != len(encoded):
-        raise ValueError("GIF timing interval traversal did not end together")
     return {"exact_visible_rgba": True, "duration_ms": sum(durations),
             "authored_frames": len(frames), "encoded_frames": len(encoded),
-            "compared_intervals": intervals, "loop_extension": loop, "sha256": sha(path)}
+            "compared_intervals": len(rows), "loop_extension": loop, "sha256": sha(path)}
 
 
 def export(doc, frames, output_dir, columns=8, no_gif=False, force=False):
@@ -429,13 +493,20 @@ def export(doc, frames, output_dir, columns=8, no_gif=False, force=False):
 
 
 def edge_diff(before_doc, before_frames, after_doc, after_frames):
-    """Propose suspicious changes in a same-pose cleanup, never delete pixels."""
-    if len(before_frames) != len(after_frames):
-        raise ValueError("Edge comparison requires equal authored frame counts")
-    if [e["duration_ms"] for e in before_doc["frames"]] != [e["duration_ms"] for e in after_doc["frames"]]:
-        raise ValueError("Edge-only comparison requires unchanged timing")
+    """Propose suspicious changes in a cleanup, never delete pixels.
+
+    Frames are paired by the time interval in which both are visible, so a revision
+    that inserted or retimed frames can still be compared (total duration must match).
+    """
+    before_times = [e["duration_ms"] for e in before_doc["frames"]]
+    after_times = [e["duration_ms"] for e in after_doc["frames"]]
+    try:
+        pairs = intervals(before_times, after_times)
+    except ValueError as error:
+        raise ValueError(f"Edge comparison requires equal total duration ({error})") from None
     rows = []
-    for i, (before, after) in enumerate(zip(before_frames, after_frames)):
+    for start, dt, i, j in pairs:
+        before, after = before_frames[i], after_frames[j]
         if before.size != after.size:
             raise ValueError("Edge comparison requires matching canvas sizes")
         a, b = list(pixels(before)), list(pixels(after))
@@ -452,16 +523,23 @@ def edge_diff(before_doc, before_frames, after_doc, after_frames):
             if neighbors >= 5:
                 suspicious.append([x, y])
         c_before, c_after = len(components(before, 8)), len(components(after, 8))
-        rows.append({"frame": i, "changed_visible_pixels": len(changed),
+        old_holes = {p for hole in enclosed_holes(before) for p in hole}
+        new_holes = [hole for hole in enclosed_holes(after) if not old_holes.issuperset(hole)]
+        gaps = after_doc["frames"][j].get("design_gaps", [])
+        rows.append({"start_ms": start, "duration_ms": dt, "before_frame": i, "after_frame": j,
+                     "changed_visible_pixels": len(changed),
                      "erased_visible_pixels": len(erased),
                      "added_visible_pixels": sum(not a[n][3] and bool(b[n][3]) for n in changed),
                      "possible_new_pinholes_xy": suspicious,
+                     "new_enclosed_holes": hole_records(new_holes, w, gaps),
                      "components_8_before": c_before, "components_8_after": c_after,
                      "component_count_increased": c_after > c_before})
-    return {"same_timing": True, "frames": rows,
-            "frames_needing_junction_review": [r["frame"] for r in rows if r["possible_new_pinholes_xy"] or r["component_count_increased"]],
+    flagged = {r["after_frame"] for r in rows if r["possible_new_pinholes_xy"] or r["component_count_increased"]
+               or any(not hole["declared"] for hole in r["new_enclosed_holes"])}
+    return {"same_timing": before_times == after_times, "frames": rows,
+            "frames_needing_junction_review": sorted(flagged),
             "naturalness": "not_assessed_by_this_script",
-            "interpretation": "Heuristic proposals only. Compare final composited character and relevant isolated layers on light/dark backgrounds; inspect adjacent frames. Small components and diagonal connections can be intentional. No automatic deletion or acceptance."}
+            "interpretation": "Heuristic proposals only. Compare final composited character and relevant isolated layers on light/dark backgrounds; inspect adjacent frames. Small components and diagonal connections can be intentional. When timing differs, rows pair the frames visible at the same time, so pose changes also appear as edits. No automatic deletion or acceptance."}
 
 
 def main():

@@ -2,7 +2,7 @@
 
 ## Review order
 
-1. **Identity:** face, eyes, hair, ears, clothing, footwear, silhouette, and actual anatomy. Inspect source and output side by side at matched character height.
+1. **Identity:** face, eyes, hair, ears, clothing, footwear, silhouette, and actual anatomy. Inspect source and output side by side at matched character height. Check discrete facts (counts, sides, presence of details) separately from drawing quality: a clean back view showing two of three tails is still wrong.
 2. **Motion:** recognizability without FX, support and weight, event accent, timing/spacing, proximal drive, follow-through, depth, and loop seam.
 3. **Pixels through time:** coherent clusters, deliberate staircase contours, stable small features, no source fragments, holes, crawling outlines, or unexplained volume changes.
 4. **Export:** layers, frame order, size, transparency, colors, exposures, sheet reconstruction, and final decoded playback.
@@ -10,6 +10,8 @@
 Separate written judgments. “Technical checks pass; sleeve motion still feels rigid at 1.1–1.4 seconds” is useful. “All checks pass, 95% natural” is not.
 
 Inspect every authored frame against the accepted identity/reference set before final acceptance. Use a frame review log or checked frame ranges; investigate all flagged areas and view transitions, not only selected attractive frames. A contact sheet can cover the set, but face/footwear/overlap details may need individual crops.
+
+The author misses their own regressions. Before calling views or an animation a candidate, give a fresh reviewer (a subagent with image access, or a human) the files, identity sheet and criteria, not your conclusions. It reports blocking faults with coordinates: a wrong identity fact, a visible hole, tear or detached part, or a key pose that misreads. Fix and re-review, at most three rounds, then report what remains. Without a reviewer, keep the gate pending.
 
 ## Edge cleanup is local and temporal
 
@@ -23,7 +25,7 @@ Identify the cause before removing pixels:
 - Temporal crawling: align the same local anatomical region across adjacent frames and stabilize its cluster transition. Raw full-frame differences confuse correct motion with noise.
 - Small isolated components: inspect them with anatomical/layer context. A 4-neighbor isolated diagonal pixel may be 8-neighbor connected; a small visible tip can be valid. Do not globally remove every component below a size threshold.
 
-Treat sparse-contour detection as a proposal, not a deletion list. Per-layer connectivity can pass while the final composite develops a transparent pinhole where cloth and appendages meet. Removing a single sleeve bridge can also detach a larger intentional tip. Recompose all layers after edits, inspect light and dark backgrounds, preserve thin intentional connections, and revert any new holes, flicker, or detached features.
+Treat sparse-contour detection as a proposal, not a deletion list. Per-layer connectivity can pass while the final composite develops a transparent pinhole where cloth and appendages meet. `audit` lists each frame's enclosed transparent regions; each is a pinhole to repair or an intentional gap to declare as `design_gaps`. Removing a single sleeve bridge can also detach a larger intentional tip. Recompose all layers after edits, inspect light and dark backgrounds, preserve thin intentional connections, and revert any new holes, flicker, or detached features.
 
 Review three consecutive frames around each modification and the whole clip afterward. Difference masks must show intentional local edits; less changed area is not itself higher quality. Do not erase shoe straps, pupils, highlights, fingers, or tail-root detail to improve a component statistic.
 

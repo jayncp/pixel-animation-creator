@@ -1,3 +1,21 @@
+# Validation records
+
+## 2.1.0 — 2026-10-19
+
+Environment: macOS 26.0.1 arm64, Python3.12.12 in a project-local uv venv outside this repository, Pillow12.3.0, ImageMagick7.1.2.
+
+**Field test.** An agent used 2.0.0 end to end on a user-supplied 96×96 three-tailed character: 256×256 front/three-quarter/side/back views, motion research, and an 18-frame, 1500 ms front-view spell cast. Labels: actual generation (three Codex CLI 0.162.0-alpha calls through the app-bundled CLI, about 65 s each, RGB output at model-chosen sizes, files written under the Codex home and copied in), actual inspection of every view and frame, sampled browser playback matched to frames, and independent subagent review rounds. The project lives outside this repository. No user acceptance is claimed.
+
+**Gaps found.** Two macOS test failures (unresolved library root). Technical checks passed while frames had visible holes and a neck tear at layer junctions. The author's own review missed most defects that independent rounds found; views had no independent review, and the owner later found a back view with two of the three tails although the generation brief demanded three. Cut-out parts lacked hidden underpaint; a projectile froze during body holds; generated guides had grid, color, proportion and identity-fact errors when brought onto the grid; near/far sides were confused once; `edge-diff` refused a revision with an inserted frame.
+
+**Changes.** The root fix, the enclosed-hole report and time-aligned `edge-diff` (see CHANGELOG), plus short general rules in the references. A first draft also added a playback-capture matcher, a timing summary and long incident-specific guidance; after a survey of comparable skills (Anthropic skill-authoring guidance and visual skills, OpenAI imagegen and hatch-pet, community sprite pipelines) those were dropped: the GIF decode check already proves pixels and timing, continuous viewing is left to the user, and each finding is stated once as a general rule with at most one example.
+
+**Checks.** 43 Python tests passed, none skipped; `scripts/validate_repo.py` passed after refreshing both manifests. On the field project's real frames (18 × 384×256), `audit` listed only the source's intentional gaps in under 1 s, and `edge-diff` paired a 17-frame and an 18-frame revision by time.
+
+**Limits.** The rules come from one character and one action and have not been rerun as fresh-context evaluations; two scenarios were added to `evals/scenarios.json` for that. The hole report is a diagnostic, not an art judgment. The live Codex result applies to that account, version and host only.
+
+---
+
 # Validation record — 2.0.0
 
 Final source validation completed2026-10-16. Artistic and technical outcomes are deliberately separate.
