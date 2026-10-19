@@ -1,6 +1,10 @@
 ---
 name: pixel-character-animation
 description: Generate pixel-character art and animation end to end from text, general artwork, pixel references, or existing projects. Enter at character design, multi-view references, motion research, animation, cleanup, or export; preserve identity and verify actual pixels and playback.
+license: MIT
+compatibility: Bundled scripts need Python 3.10+ and Pillow 10–12 (requirements.txt); image generation, editors and players are optional and discovered at runtime.
+metadata:
+  version: "2.1.0"
 ---
 
 # Pixel Character Animation
@@ -12,7 +16,7 @@ Own the full path from a user's idea to reviewed pixel art and animation. Start 
 1. Inspect supplied images, archives, and existing final indices. Read `START_HERE.md` / `project_resume.json` when supplied; resolve paths from their containing directory. Never select a final merely by the largest version number. Preserve original assets and work in a new revision.
 2. Establish the requested deliverable and entry point: text, ordinary image, pixel image, accepted views, motion draft, repair, or export. Read [stages-and-entry.md](references/stages-and-entry.md). Reuse valid upstream work; repair only missing or invalid prerequisites. Imported evidence can satisfy a prerequisite without regenerating it.
 3. Default **new character/reference canvases to 256 × 256 pixels per view**, unless the user specifies otherwise. For an existing project, preserve its established size unless asked to migrate. This is a working default, not a scientific minimum or a guarantee of detail. Decide animation/FX bounds separately and record them; do not silently shrink the actor to fit a projectile.
-4. Record a compact project spec: source roles, identity, size, palette/style, views and provenance, action intent, stage evidence, final files, and limitations. Use [project-spec.md](references/project-spec.md) and the example only as needed. Existing projects do not need conversion merely to receive a small repair.
+4. Keep a compact project record — `START_HERE.md`, `project_resume.json` and a final index — covering source roles, identity, size, palette/style, views and provenance, action intent, each stage's status with its review evidence, final files, and limitations ([resume-or-new.md](references/resume-or-new.md)). Existing projects do not need conversion merely to receive a small repair.
 5. Discover actual tools before choosing a route. Read [tool-adapters.md](references/tool-adapters.md) when generation, native editing, skeleton aids, or setup is needed. Prefer built-in image generation when exposed, existing local tools, and project-local configuration. A binary's presence is not proof of its capabilities, authentication, or free usage.
 
 ## A. Create a pixel identity and reference views

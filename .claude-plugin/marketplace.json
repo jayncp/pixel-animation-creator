@@ -1,0 +1,20 @@
+{
+  "name": "pixel-animation-creator",
+  "owner": {
+    "name": "jayncp"
+  },
+  "metadata": {
+    "description": "Pixel character design, multi-view references and animation as an agent skill."
+  },
+  "plugins": [
+    {
+      "name": "pixel-character-animation",
+      "source": "./",
+      "strict": false,
+      "description": "Pixel character art and animation end to end, entering at any stage.",
+      "skills": [
+        "./skills/pixel-character-animation"
+      ]
+    }
+  ]
+}

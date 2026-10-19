@@ -10,23 +10,21 @@ A change in model/API options belongs in the tool adapter, not the character ide
 
 1. Create a local branch; describe the request and affected stage. Preserve unrelated user edits.
 2. Update the canonical reference once and link to it rather than repeat it in every file.
-3. Run all Python tests and `scripts/validate_repo.py`. Test path relocation, no-overwrite, modified evidence, missing capabilities and artifact corruption, not just a happy path.
+3. Run all Python tests and `scripts/validate_repo.py`. Test path relocation, no-overwrite, missing capabilities and artifact corruption, not just a happy path.
 4. Run relevant `evals/scenarios.json` cases in a clean context with minimal raw inputs. Keep generated projects outside the skill tree. Label planning tests, actual generation, image inspection and real playback separately.
 5. An agent review is not user acceptance. Report missing environment/permissions as blocked. Never label a scenario executed just because its prompt exists.
 6. Record exact commands/runtime versions/results and remaining limits in `docs/VALIDATION.md`. Do not expose tokens, signed URLs, private notes or system prompts.
-7. Update changelog and run `python scripts/refresh_manifest.py`; commit source, docs and both manifests. Do not commit credentials, local configs, virtual environments, caches, downloaded binaries or evaluation media from third parties.
+7. Update the changelog and the `metadata.version` in `SKILL.md` together. Do not commit credentials, local configs, virtual environments, caches, downloaded binaries or evaluation media from third parties.
 
 ## Dependency and adapter policy
 
 Python runtime dependencies are declared in the skill's requirements file. Aseprite, its community MCP server and Blender are optional external tools, not bundled. Verify source/version/license before setup. Use project-local environments/configuration; never make a global installation an implicit side effect. Capability detection is read-only; a live model invocation may consume usage and is not a free probe.
 
-## Release ZIP with Git history
+## Release
 
-Run `python scripts/package_repo.py /absolute/path/to/release.zip` from this repository after committing. The packager requires a clean tracked tree, validates the repository, and includes tracked files plus only safe portable Git metadata/objects. It does not copy hooks, remotes, credentials, worktree pointers, local runtime data or ignored files. It creates a real Git repository snapshot preserving commit history, not a ZIP pretending to be one.
+The source is published at https://github.com/jayncp/pixel-animation-creator; Git commits provide integrity, so no hash manifests are kept. For a release: tests and `scripts/validate_repo.py` pass, `claude plugin validate .` passes when the Claude Code CLI is available, the changelog and `metadata.version` agree, then tag `vX.Y.Z` on main. Installers copy only `skills/pixel-character-animation/`, which therefore carries its own `LICENSE.txt` and `requirements.txt`. For a Claude.ai upload, zip that folder: `cd skills && zip -r pixel-character-animation.zip pixel-character-animation`.
 
-Extract into a new directory. Run `git status --short`, `git log --oneline`, `git fsck --full`, all tests and repository validation. Verify the ZIP entry names contain no absolute or parent traversal paths and record its SHA-256. Keep ZIP/hash outside the tracked tree to avoid self-referential manifests.
-
-ZIP preserves necessary Git object bytes; platform extraction behavior can vary. Use an archiver that extracts hidden `.git` entries. The first three commits use a local non-personal author label; later commits use the maintainer's own Git identity. The source remote is https://github.com/jayncp/pixel-animation-creator; the packaged ZIP does not carry remote configuration.
+The first three commits use a local non-personal author label; later commits use the maintainer's own Git identity.
 
 ## Coverage boundaries
 

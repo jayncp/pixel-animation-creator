@@ -9,6 +9,8 @@ From a field test (96×96 pixel character → 256 views → spell-cast animation
 - `edge-diff` pairs frames by time interval, so inserted or retimed frames can be compared, and reports new holes.
 - Rules: check discrete identity facts (counts, sides, presence) per view; a fresh independent reviewer before a candidate, at most three rounds; honest playback wording for still-only agents; cut-out underpaint and overlapping joints; effect timing independent of body holds; near/far side logging; guide-to-grid conversion and noninteger size routes.
 - Codex adapter: app-bundled CLI discovery and the field-tested command shape.
+- Publishing: MIT license (repository root and skill folder), Claude Code marketplace entry, install commands in the README, `license`/`compatibility`/`metadata.version` frontmatter.
+- Removed mechanisms that no publishing convention uses or that duplicated other records: per-file hash manifests and their refresh script, the release-ZIP packager, the `project_stage.py` stage/evidence helper with its spec reference, example and tests (projects keep `START_HERE.md`, `project_resume.json` and a final index), `TEST_RESULTS.md` and `requirements-tested.txt`. The Chinese guide moved into the README; `validate_repo.py` now checks only frontmatter, local links and JSON.
 
 ## 2.0.0 — 2026-10-16
 

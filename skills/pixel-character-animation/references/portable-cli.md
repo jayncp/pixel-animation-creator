@@ -42,7 +42,7 @@ The topology diagnostic reports 4- and 8-neighbor components and pixels in compo
 
 ## Tests and dependency scope
 
-Python 3.10+ and Pillow 10–12 are the declared runtime. Tests were executed with the version recorded in `TEST_RESULTS.md`; no claim is made that every supported minor version was exercised. Run:
+Python 3.10+ and Pillow 10–12 are the declared runtime; tested versions are recorded in the repository's docs/VALIDATION.md, and no claim is made that every supported minor version was exercised. Run:
 
 ```sh
 python -m unittest discover -s /path/to/pixel-character-animation/tests -v

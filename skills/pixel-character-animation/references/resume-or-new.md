@@ -12,6 +12,7 @@ Suggested profile fields:
 - `reference_views`: paths or objects with `path`, `view`, `provenance` (original/inferred/mirrored).
 - `final_index`: relative path to the authoritative action/export index.
 - `current_working_canvas`, `native_editor`, `resume_entrypoint`, `dependencies`.
+- `stages`: per stage, status (passed/pending/blocked/not applicable) with the review file that supports it.
 - `known_limitations`, `review_evidence`, and changed/user-accepted decisions when known.
 
 Resolve paths from the profile directory. Reject missing/escaping/untrusted references rather than reaching into arbitrary machine paths. Read a script before running it, remap historical paths deliberately, and run into a fresh output directory. A prior “final” or self-rating is evidence about that revision, not proof of current visual quality or user acceptance.

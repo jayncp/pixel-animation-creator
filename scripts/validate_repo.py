@@ -1,38 +1,39 @@
 #!/usr/bin/env python3
-"""Validate release structure and local links. Does not certify artwork."""
-import argparse, hashlib, json, pathlib, re, subprocess, sys
+"""Check the skill frontmatter against the Agent Skills spec, local Markdown links and JSON files. Does not certify artwork."""
+import json, pathlib, re, sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SKILL = ROOT / 'skills/pixel-character-animation'
+FIELDS = {'name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools'}
+
+def frontmatter_errors():
+    text = (SKILL / 'SKILL.md').read_text(encoding='utf-8')
+    if not text.startswith('---\n') or '\n---\n' not in text[4:]:
+        return ['SKILL.md must start with a --- frontmatter block']
+    block = text[4:text.index('\n---\n', 4)]
+    fields = dict(re.findall(r'^([A-Za-z-]+):[ \t]*(.*)$', block, re.M))
+    errors = [f'unknown frontmatter field {k}' for k in fields if k not in FIELDS]
+    name, description = fields.get('name', ''), fields.get('description', '')
+    if not re.fullmatch(r'[a-z0-9]+(-[a-z0-9]+)*', name) or len(name) > 64 or name != SKILL.name:
+        errors.append(f'name must be lowercase-hyphenated, at most 64 characters and match the directory: {name!r}')
+    if not 1 <= len(description) <= 1024:
+        errors.append('description must be 1-1024 characters')
+    if len(fields.get('compatibility', '')) > 500:
+        errors.append('compatibility must be at most 500 characters')
+    return errors
 
 def validate():
-    failures = []
-    required = ['SKILL.md', 'agents/openai.yaml', 'scripts/pixel_anim.py', 'scripts/project_stage.py', 'references/project-spec.md']
-    for p in required:
-        if not (SKILL / p).is_file(): failures.append(f'missing {p}')
-    body = (SKILL / 'SKILL.md').read_text()
-    if not body.startswith('---\n') or 'name: pixel-character-animation' not in body.split('---')[1]:
-        failures.append('invalid skill frontmatter')
+    failures = frontmatter_errors()
     for p in ROOT.rglob('*.md'):
         if any(x in p.parts for x in ('.git', '.venv', '__pycache__')): continue
-        for target in re.findall(r'\]\(([^)]+)\)', p.read_text()):
-            if '://' in target or target.startswith(('#','mailto:')): continue
-            local = target.split('#',1)[0]
-            if local and not (p.parent / local).exists(): failures.append(f'broken link {p.relative_to(ROOT)}: {target}')
-    for p in (SKILL / 'assets').rglob('*.json'):
-        try: json.loads(p.read_text())
-        except (ValueError, OSError) as e: failures.append(f'invalid JSON {p.name}: {e}')
-    for p in (SKILL / 'assets/tool-configs').glob('*.json.example'):
-        try: json.loads(p.read_text())
-        except ValueError as e: failures.append(f'invalid JSON template {p.name}: {e}')
-    manifest = ROOT / 'CONTENT_MANIFEST.sha256'
-    if manifest.exists():
-        for line in manifest.read_text().splitlines():
-            digest, rel = line.split('  ', 1)
-            p = ROOT / rel
-            if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != digest:
-                failures.append(f'manifest mismatch {rel}')
-    print(json.dumps({'repository_validation_pass': not failures, 'errors': failures,
-                      'artistic_quality': 'not_assessed', 'live_provider_support': 'not_assessed'}, ensure_ascii=False, indent=2))
+        for target in re.findall(r'\]\(([^)]+)\)', p.read_text(encoding='utf-8')):
+            local = target.split('#', 1)[0]
+            if '://' in target or target.startswith(('#', 'mailto:')) or not local: continue
+            if not (p.parent / local).exists(): failures.append(f'broken link {p.relative_to(ROOT)}: {target}')
+    for p in [*ROOT.rglob('*.json'), *ROOT.rglob('*.json.example')]:
+        if '.git' in p.parts or '.venv' in p.parts: continue
+        try: json.loads(p.read_text(encoding='utf-8'))
+        except ValueError as e: failures.append(f'invalid JSON {p.relative_to(ROOT)}: {e}')
+    print(json.dumps({'repository_validation_pass': not failures, 'errors': failures, 'artistic_quality': 'not_assessed'}, indent=2))
     return 1 if failures else 0
 
 if __name__ == '__main__':

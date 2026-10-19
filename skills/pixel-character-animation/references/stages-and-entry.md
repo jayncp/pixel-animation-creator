@@ -14,11 +14,11 @@ The stages are evidence boundaries, not a conveyor belt that always starts over.
 | Finished PNG sequence | Inspect timings/identity; export and verify | Do not require a new skeleton; flag unavailable upstream evidence |
 | Existing project archive | Locate final index, inspect newest authoritative candidate and known limits | Imported stage evidence is allowed; old self-ratings are not user approval |
 
-Stages used by the project helper are intake, design, views, research, blocking, animation, cleanup and delivery. They can be iterated: research may expose a missing view; playback may return to blocking; cleanup may reveal source segmentation. Revalidate affected downstream outputs after an upstream change. Unaffected evidence can be retained with matching artifact identities.
+The stages are intake, design, views, research, blocking, animation, cleanup and delivery. They can be iterated: research may expose a missing view; playback may return to blocking; cleanup may reveal source segmentation. Revalidate affected downstream outputs after an upstream change. Unaffected evidence can be retained when its files did not change.
 
-For each relevant gate record: criterion, artifacts/version or hashes, viewing/check method, observed result, reviewer, remaining issues, and status. `passed` means the specified check was actually performed on those artifacts, not that a file exists. `pending`/`blocked` must be explicit. `not_applicable` needs a scope reason. Imported evidence should state its origin and what was personally rechecked.
+Record each relevant gate in the project record (see [resume-or-new.md](resume-or-new.md)): criterion, artifacts and revision, viewing/check method, observed result, reviewer, remaining issues, and status. `passed` means the specified check was actually performed on those artifacts, not that a file exists. `pending`/`blocked` must be explicit. `not_applicable` needs a scope reason. Imported evidence should state its origin and what was personally rechecked.
 
-A short repair need not adopt a new manifest. A new or extended project benefits from the provided spec/route helper; `init --entry-stage` leaves upstream stages `pending` until you record their evidence or mark them not applicable. The helper validates declarations and paths; it cannot certify that someone watched a GIF or that a tail looks natural. Never let a machine-selected next stage replace visual judgment.
+A short repair need not adopt a new record format. When entering mid-pipeline, mark upstream stages as reused with their origin, pending, or not applicable with a reason; a record cannot certify that someone watched a GIF or that a tail looks natural.
 
 ### Practical handoff examples
 
