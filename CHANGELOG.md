@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.2.0 — 2026-10-20
+
+From a second field test (96×96 pixel character drawn in a foreshortened mid-air pose → neutral base and views → side-view dagger throw). Guidance only; scripts and tests are unchanged.
+
+- Views: a foreshortened action-pose source stays the identity master while the neutral base is a labeled inference; view scope for a single source plus one action; one saved set of joint heights as the cross-view authority; guide-to-grid mapping by hue class, with spill removal and outlines re-derived from material boundaries.
+- Motion: a researched camera view stays provisional until the accent poses keep the face and held props readable; a default research size; rotated parts instead of shear for large torso leans.
+- Checks: holes at both logical and export size after Scale2x; every fix confirmed on the composited export; reviewers are told what changed since the last round and judge discrete facts as they read at 1×; character and composite audited separately; `design_gaps` use frame-image coordinates; `edge-diff` after geometry edits.
+- Delivery: fixed-legend text maps as an editable fallback without a native editor.
+
 ## 2.1.0 — 2026-10-19
 
 From a field test (96×96 pixel character → 256 views → spell-cast animation) and the owner's review; streamlined after a survey of comparable image/sprite skills.

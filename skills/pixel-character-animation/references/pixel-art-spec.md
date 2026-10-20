@@ -25,7 +25,7 @@ These are style-aware review criteria, not a universal numerical definition of p
 
 **Palette:** count visible colors, inspect near duplicates, test material separation and contrast. Reducing colors is a reviewed edit, not a quality score. Keep a shared stable palette across views/cels unless illumination/FX change is intentional. Lossy JPEG is not a pixel master.
 
-**Grid consistency:** avoid mixed accidental pixel scales and noninteger blurred transforms. Rotation/resampling of source cards requires cleanup of silhouette, small features and thickness. Do not hide artifacts with global smoothing.
+**Grid consistency:** avoid mixed accidental pixel scales and noninteger blurred transforms. Rotation/resampling of source cards requires cleanup of silhouette, small features and thickness. Do not hide artifacts with global smoothing. A color-preserving 2× such as Scale2x can close new one-pixel holes where thin shapes join only diagonally (blade tips, staircase diagonals, close parallel lines): check enclosed holes at both logical and export size, and give thin shapes 4-connected runs or wider spacing.
 
 ## Reference and temporal consistency
 

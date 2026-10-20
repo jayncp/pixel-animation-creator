@@ -1,6 +1,6 @@
 # Motion reference, skeleton reasoning and proportion-aware adaptation
 
-Use this stage for a new or substantially redesigned action. An edge-only repair with a clear source does not require repeating unrelated research. Keep research bounded to the requested action, not a broad inspiration dump.
+Use this stage for a new or substantially redesigned action. An edge-only repair with a clear source does not require repeating unrelated research. Keep research bounded to the requested action, not a broad inspiration dump: by default 3–5 sources you can actually step through frame by frame, at least one live-action and one drawn or pixel source. Stop when the key events and their timing are covered.
 
 ## Observe, then design
 

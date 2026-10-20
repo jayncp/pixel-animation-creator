@@ -4,7 +4,7 @@ description: Generate pixel-character art and animation end to end from text, ge
 license: MIT
 compatibility: Bundled scripts need Python 3.10+ and Pillow 10–12 (requirements.txt); image generation, editors and players are optional and discovered at runtime.
 metadata:
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 # Pixel Character Animation
@@ -36,7 +36,7 @@ For a new or materially redesigned action, read [motion-research.md](references/
 - Search online for relevant motion references, pixel or non-pixel. Inspect the actual accessible images/frames/video, not titles or descriptions alone. Record sources, what was observed, and what will be adapted. Respect private-upload and source-media rights. If references cannot be accessed, mark research incomplete and distinguish an explicitly provisional motion plan.
 - Break the reference into support, line of action, pelvis/chest/head, joint trajectories, key events and real-time rhythm. Manual landmarks or a local Blender/IK proxy are legitimate aids; use pose-estimation tools only when actually available and appropriate. Do not claim automatic skeleton extraction or physical validation from a drawn proxy.
 - Retarget intent and normalized trajectories to the character's proportions. Preserve limb lengths, reach, planted contact and volume; adjust angles, steps, torso lean and foreshortening instead of copying a realistic skeleton into a stylized body.
-- Block the action without decorative detail or FX. Establish readable key poses, support and center-of-mass shifts, anticipation where appropriate, release/accent, extension, recovery and settle. Record event times in milliseconds and deliberate spacing. **No fixed frame-count cap:** author enough poses to convey the action; holds and duplicate exports are not new poses.
+- Block the action without decorative detail or FX. A researched camera view stays provisional until its accent poses keep the face and held props readable and within reach. Establish readable key poses, support and center-of-mass shifts, anticipation where appropriate, release/accent, extension, recovery and settle. Record event times in milliseconds and deliberate spacing. **No fixed frame-count cap:** author enough poses to convey the action; holds and duplicate exports are not new poses.
 - Keep the strong accent fast and secondary motion offset. Add selective true in-betweens where arcs, depth, view transitions or recovery lose information. Keep named appendage roots/branches/tips continuous in consistent coordinates; attached roots alone do not prevent tail teleportation.
 
 ## C. Refine and validate the actual animation

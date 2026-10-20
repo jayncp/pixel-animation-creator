@@ -8,7 +8,7 @@
 - Use optional 3D/IK proxies for perspective, support, reach, limb lengths, and depth. A flat 2D pose mapped into Blender is not full 3D motion capture or physics. A successful solver is not a naturalness review.
 - Use real image inspection and actual-speed playback throughout. An available image viewer does not automatically imply a real-time animation reviewer.
 
-When a native editor is absent, preserve layered PNG sources with order, offsets, timing, and configuration. If a native format is explicitly required, state the exact missing capability and ask only for what is needed. Do not silently relabel a flattened file as editable native source or make an unnecessary installation a prerequisite to all independent work.
+When a native editor is absent, preserve layered PNG sources with order, offsets, timing, and configuration. Hand-authored parts may also be kept as fixed-legend text maps: record the legend and origin, and use distinct symbols for “leave unchanged” and “erase” so later edits are unambiguous. If a native format is explicitly required, state the exact missing capability and ask only for what is needed. Do not silently relabel a flattened file as editable native source or make an unnecessary installation a prerequisite to all independent work.
 
 ## Portable helpers
 

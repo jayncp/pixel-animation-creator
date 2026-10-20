@@ -1,5 +1,21 @@
 # Validation records
 
+## 2.2.0 — 2026-10-20
+
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.
+
+**Field test.** An agent used 2.1.0 end to end on a user-supplied 96×96 rogue drawn in a foreshortened mid-air pose: identity sheet of 15 discrete facts, original-pose master, neutral front, three-quarter and side views at 256×256 (128 logical + Scale2x), motion research, and a 16-frame, 1680 ms side-view overhand dagger throw with the knife on a separate effect layer. Labels: actual generation (one Codex CLI 0.162.0-alpha call through the app-bundled CLI), actual inspection of every view and frame, no continuous playback (still-only agent), three independent subagent review rounds each for views and animation. The project lives outside this repository. No user acceptance is claimed.
+
+**Gaps found.** The skill gave no route from an action-pose source to a neutral base, and its view-scope rules did not cover a single source plus one action. The researched three-quarter view failed at blocking: the near arm crossed the face at release. The generated guide drew two of three thigh knives in every view, which the 2.1.0 per-view count rule caught before conversion; its finer pixel pitch and green spill scattered outlines and mapped greys to a brown material. Shear deformed large torso leans. Scale2x closed one-pixel holes at diagonal blade tips and parallel trail lines. Effect gaps were reported with character holes in the composite. Independent rounds found nine blocking faults the author missed, two of them regressions introduced by fixes; one recorded fix was hidden in the composite by draw order until the third view round. Research took about 44 minutes for 12 sources.
+
+**Changes.** Short general rules merged into the existing references (see CHANGELOG), each with at most one example; one behavioral scenario added. No script change: `audit`, `export`, `verify-gif` and `edge-diff` agreed with the agent's own independent checks.
+
+**Checks.** 22 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
+
+**Limits.** The new rules come from one more character and one more action and have not been rerun as fresh-context evaluations.
+
+---
+
 ## 2.1.0 — 2026-10-19
 
 Environment: macOS 26.0.1 arm64, Python3.12.12 in a project-local uv venv outside this repository, Pillow12.3.0, ImageMagick7.1.2.

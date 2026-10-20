@@ -11,7 +11,7 @@ Separate written judgments. “Technical checks pass; sleeve motion still feels 
 
 Inspect every authored frame against the accepted identity/reference set before final acceptance. Use a frame review log or checked frame ranges; investigate all flagged areas and view transitions, not only selected attractive frames. A contact sheet can cover the set, but face/footwear/overlap details may need individual crops.
 
-The author misses their own regressions. Before calling views or an animation a candidate, give a fresh reviewer (a subagent with image access, or a human) the files, identity sheet and criteria, not your conclusions. It reports blocking faults with coordinates: a wrong identity fact, a visible hole, tear or detached part, or a key pose that misreads. Fix and re-review, at most three rounds, then report what remains. Without a reviewer, keep the gate pending.
+The author misses their own regressions. Before calling views or an animation a candidate, give a fresh reviewer (a subagent with image access, or a human) the files, identity sheet and criteria, not your conclusions. It reports blocking faults with coordinates: a wrong identity fact, a visible hole, tear or detached part, or a key pose that misreads, including a discrete fact misread through occlusion or adjacency (a dagger that appears to sit in the other hand). Fix and re-review, at most three rounds, telling each new reviewer which regions changed since the last round, because fixes cause regressions; then report what remains. Without a reviewer, keep the gate pending.
 
 ## Edge cleanup is local and temporal
 
@@ -27,7 +27,7 @@ Identify the cause before removing pixels:
 
 Treat sparse-contour detection as a proposal, not a deletion list. Per-layer connectivity can pass while the final composite develops a transparent pinhole where cloth and appendages meet. `audit` lists each frame's enclosed transparent regions; each is a pinhole to repair or an intentional gap to declare as `design_gaps`. Removing a single sleeve bridge can also detach a larger intentional tip. Recompose all layers after edits, inspect light and dark backgrounds, preserve thin intentional connections, and revert any new holes, flicker, or detached features.
 
-Review three consecutive frames around each modification and the whole clip afterward. Difference masks must show intentional local edits; less changed area is not itself higher quality. Do not erase shoe straps, pupils, highlights, fingers, or tail-root detail to improve a component statistic.
+Review three consecutive frames around each modification and the whole clip afterward. Confirm every fix on the composited export, not in the edited part: draw order or another layer can hide it. Record only what is visible there, ideally with a pixel count or difference image. Difference masks must show intentional local edits; less changed area is not itself higher quality. Do not erase shoe straps, pupils, highlights, fingers, or tail-root detail to improve a component statistic.
 
 For appendage topology, inspect root overlap, union and branch connectivity, and main-body thickness. Clearly label connectivity definitions and root neighborhoods. An 8-connected result is not proof of strong volume or natural motion; erosion can be diagnostic but is not a deletion prescription.
 

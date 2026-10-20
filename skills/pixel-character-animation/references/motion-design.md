@@ -12,6 +12,8 @@ Equal frame durations do not imply uniform speed. Repeated identical poses creat
 
 Choose sufficient key poses to read the action without effects. Plan support-foot planted intervals and swing intervals, pelvis/chest changes, gaze/head intent, hand path, and cloth/appendage following. Keep body volume and limb length stable; explain apparent shortening through depth, not unexplained stretching.
 
+Treat a researched camera view as provisional: block the accent poses (drive, release, contact) in it first, and change the view or the limb path if a moving limb hides the face or a held prop, or cannot reach its target. Example: in three-quarter view a near throwing arm crossed the whole face at release; a side view kept face and hand clear.
+
 Typical choices, not universal recipes:
 
 - Idle: asymmetric breathing/settling, small regional motion, stable feet, delayed hair/cloth. Do not scale the whole body. A single repeating GIF with one blink repeats that blink every cycle; do not claim it is random or independent. Use a longer authored cycle or runtime state machine if nonperiodic behavior is actually requested.
@@ -37,7 +39,7 @@ Depth order must change coherently. When a branch goes behind the body, record i
 
 ## Cut-out layers
 
-Moving parts of a finished sprite exposes pixels the source never drew. Underpaint each movable part's hidden area, and offset a child part only in directions that keep its joint overlapped (a head lagging upward tears the neck open). Recheck the composite's hole report after each layer change.
+Moving parts of a finished sprite exposes pixels the source never drew. Underpaint each movable part's hidden area, and offset a child part only in directions that keep its joint overlapped (a head lagging upward tears the neck open). Recheck the composite's hole report after each layer change. Translate or shear a part only for small tilts (roughly up to 10°); a larger lean or pitch needs a dedicated rotated part (e.g. RotSprite, then hand cleanup) whose joint anchors rotate with it.
 
 ## Cloth and far-arm geometry
 
