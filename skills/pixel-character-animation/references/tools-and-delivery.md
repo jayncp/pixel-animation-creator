@@ -14,7 +14,7 @@ When a native editor is absent, preserve layered PNG sources with order, offsets
 
 The included CLI depends on Python 3.10+ and Pillow. Check first with `python -c "import PIL; print(PIL.__version__)"`. Dependency installation is separate and subject to the current environment's permissions; no script installs packages or accesses a network. Requirements are in `requirements.txt`. Use a suitable existing environment if available.
 
-All manifest asset paths are relative to that manifest. The helper rejects missing assets, absolute paths, and paths escaping the project root, including symlinks. Create the manifest at a shared project root when assets span subfolders. Outputs are explicit; export refuses existing outputs unless `--force` is supplied. Do not use `--force` against frozen originals.
+All manifest asset paths are relative to that manifest. The helper rejects missing assets, absolute paths, and paths escaping the project root, including symlinks. Create the manifest at a shared project root when assets span subfolders. Outputs are explicit; export refuses existing outputs unless `--force` is supplied. Do not use `--force` against frozen originals. Treat your own copies the same way: write archives and earlier revisions once under version-named paths and check that a copy target does not exist before copying (`cp -n`), because shell copies do not refuse.
 
 The generic helpers provide diagnostics and exact exports, not a universal rig or an automatic art-quality score. Adapt the project renderer for the actual character, or draw cels. The companion study's reproduction entrypoint reproduces that character only.
 

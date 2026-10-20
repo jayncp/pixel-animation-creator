@@ -10,6 +10,8 @@ Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outsi
 
 **Changes.** Short general rules merged into the existing references (see CHANGELOG), each with at most one example; one behavioral scenario added. No script change: `audit`, `export`, `verify-gif` and `edge-diff` agreed with the agent's own independent checks.
 
+**Revision round.** The user then reviewed the candidate and named three faults: an unnatural profile eye, the side hair, and a thick tan band behind the arm in early frames. The front eye's lash bar had been moved onto the profile unchanged, so every identity fact still matched; the hair used six evenly spaced parallel strand lines; the arm and torso each kept their own skin outline, which lay side by side and became a 4 px band after Scale2x (40 all-outline 2×2 blocks in the logical frames). Three more revisions, each with a fresh review round, cut the blocks to 3 point junctions with 0 blocking faults. A mis-aimed shell copy overwrote one view archive; it was recovered by deterministic re-rendering checked against a saved comparison. Five more rules (see CHANGELOG) and two scenario checks came from this round.
+
 **Checks.** 22 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
 
 **Limits.** The new rules come from one more character and one more action and have not been rerun as fresh-context evaluations.

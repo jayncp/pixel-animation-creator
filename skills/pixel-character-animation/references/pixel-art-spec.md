@@ -17,7 +17,7 @@ These are style-aware review criteria, not a universal numerical definition of p
 
 **Contours/jaggies:** a smooth intended curve needs deliberate staircase runs. Look for accidental short–long–short jumps and uneven thickness; repair pixel placement locally. Corners, jagged fur and angular fabric do not need monotonically changing runs. “Clean” does not mean abolishing the pixel staircase.
 
-**Banding:** parallel contour/shadow strips can flatten shape or exaggerate stair steps. Describe volume with purposeful clusters instead of stacking equal-width outlines. Do not automatically erase stripes or seams that belong to the design.
+**Banding:** parallel contour/shadow strips can flatten shape or exaggerate stair steps. Describe volume with purposeful clusters instead of stacking equal-width outlines. Do not automatically erase stripes or seams that belong to the design. Evenly spaced, equal-length interior lines (hair strands, folds, fur) also read as a pattern; vary their length, spacing and direction and carry the volume with mid-tones.
 
 **Shading:** use value separation to keep masses readable. Avoid pillow shading that follows every edge regardless of the light. Avoid gradients/dither that obscure a small face or cause temporal shimmer. Dither is available as a deliberate material/style choice, not a default conversion filter.
 

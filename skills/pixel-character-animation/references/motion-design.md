@@ -41,6 +41,8 @@ Depth order must change coherently. When a branch goes behind the body, record i
 
 Moving parts of a finished sprite exposes pixels the source never drew. Underpaint each movable part's hidden area, and offset a child part only in directions that keep its joint overlapped (a head lagging upward tears the neck open). Recheck the composite's hole report after each layer change. Translate or shear a part only for small tilts (roughly up to 10°); a larger lean or pitch needs a dedicated rotated part (e.g. RotSprite, then hand cleanup) whose joint anchors rotate with it.
 
+Parts outlined separately double their contour where same-material parts touch at the same depth: two lines side by side, or line–fill–line, which upscaling thickens into a band. Merge these into one contour when compositing, but keep the line that separates different depths (near leg over far leg). Count 2×2 blocks made only of outline colors to find doubled lines.
+
 ## Cloth and far-arm geometry
 
 Maintain an anatomically plausible elbow/wrist route, shoulder attachment, and a sleeve envelope enclosing that route. Projected sleeve width and length should decrease or change overlap as the arm recedes. A texture card cannot substitute for this volume indefinitely. Check neutral holds because a formerly fast geometric defect may become obvious after retiming.
