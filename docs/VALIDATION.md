@@ -1,5 +1,15 @@
 # Validation records
 
+## 2.3.1 — 2026-10-20
+
+**Source.** The owner asked whether the skill stresses effect–motion consistency and asked for secondary parts to follow pronounced momentum. 2.3.0 tied part-following effects to sampled paths and projectiles to their release, but had no general rule tying every effect to its causing event, and covered hair and cloth only in passing (idle, sleeves, turns, long appendages). In the third field test the first review round found hair back in its rest shape while the body still dashed. Two short rules and one review item were added; one scenario gained two checks.
+
+**Checks.** 22 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
+
+**Limits.** Not yet exercised in a field test; the next test is asked to report whether these rules worked.
+
+---
+
 ## 2.3.0 — 2026-10-20
 
 Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.

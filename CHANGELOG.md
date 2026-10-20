@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.3.1 — 2026-10-20
+
+From the owner's review after the third field test. Guidance only; scripts and tests are unchanged.
+
+- Motion: every effect starts at the time and place of the event that causes it and moves with, or stays behind, the part that drives it; pronounced momentum shows in the loose parts the design already has (trail, lift or compress, overshoot, settle), with drawn variants for a fixed-part rig and no added parts.
+- Checks: the motion review covers secondary parts answering the body's momentum and effects tied to their causing event.
+
 ## 2.3.0 — 2026-10-20
 
 From a third field test (the same rogue continued from accepted views → a side-view dual-dagger charge, dash and cross slash with sword-qi, game-skill style) and the user's review of its effects. Guidance only; scripts and tests are unchanged.

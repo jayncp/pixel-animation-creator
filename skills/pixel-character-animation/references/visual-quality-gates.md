@@ -3,7 +3,7 @@
 ## Review order
 
 1. **Identity:** face, eyes, hair, ears, clothing, footwear, silhouette, and actual anatomy. Inspect source and output side by side at matched character height. Check discrete facts (counts, sides, presence of details) separately from drawing quality: a clean back view showing two of three tails is still wrong.
-2. **Motion:** recognizability without FX, support and weight, event accent, timing/spacing, proximal drive, follow-through, depth, and loop seam.
+2. **Motion:** recognizability without FX, support and weight, event accent, timing/spacing, proximal drive, follow-through (hair and clothing answer the body's momentum), depth, loop seam, and effects that start at their causing event and follow their driver.
 3. **Pixels through time:** coherent clusters, deliberate staircase contours, stable small features, no source fragments, holes, crawling outlines, or unexplained volume changes.
 4. **Export:** layers, frame order, size, transparency, colors, exposures, sheet reconstruction, and final decoded playback.
 
