@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.3.0 — 2026-10-20
+
+From a third field test (the same rogue continued from accepted views → a side-view dual-dagger charge, dash and cross slash with sword-qi, game-skill style) and the user's review of its effects. Guidance only; scripts and tests are unchanged.
+
+- Motion: effects that follow a part (smears, trails, slash marks left in the air) are drawn from the part's tip path sampled in world coordinates, body travel included, widening toward the swing pivot; a thrust sweeps almost no smear; when real paths cannot make the wanted shape, the motion changes, not the effect's position; researched poses and prop placements are provisional like the researched view; a stylized-skill note (exaggeration through pose, holds, travel and effects; opaque afterimages and rimmed pale effects under binary alpha).
+- Research: live action only when weight or contact is in question; a switch rule for sites that block automated fetching.
+- Views: an action may settle a fact the source leaves uncertain, labeled and kept consistent.
+- Checks: every held prop readable in each accent frame, or its occlusion unmisreadable, in the author's own frame review; own check scripts measure rendered, visible pixels; composite-only enclosures classified as effect-made.
+- Delivery: effects layered by depth with the stacking order; in-place frames with a root table and/or a wide canvas for a travelling action, with the effects' coordinate space; separately upscaled layers stacked into the composite, hidden lower-layer pixels cleared and single-pixel seams sealed.
+
 ## 2.2.0 — 2026-10-20
 
 From a second field test (96×96 pixel character drawn in a foreshortened mid-air pose → neutral base and views → side-view dagger throw). Guidance only; scripts and tests are unchanged.

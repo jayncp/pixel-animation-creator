@@ -24,7 +24,7 @@ Deliver the scope requested, usually:
 
 - Master/reference identity sheet and a small project resume profile.
 - Authoritative final index with action, file paths, authored duration, and known limitations.
-- Character PNG sequence; separate FX where used; timed GIF; sprite sheet + JSON.
+- Character PNG sequence; separate FX where used, one layer per depth (behind / in front of the character) with the stacking order; timed GIF; sprite sheet + JSON. For a travelling action, in-place character frames with a per-frame root table and/or a wide canvas, and the effects' coordinate space (attached or world).
 - Native editable source, or clearly labeled layered-source fallback if permitted.
 - Action timeline/configuration, source assets, reproducible scripts and dependency notes.
 - Short visual/technical review log and relevant validation evidence.

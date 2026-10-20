@@ -1,5 +1,21 @@
 # Validation records
 
+## 2.3.0 — 2026-10-20
+
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.
+
+**Field test.** An agent used 2.2.0 to continue the 2.2.0 test's rogue (accepted side view and identity sheet copied in, the earlier project left read-only) into a side-view dual-dagger charge, dash and cross slash with sword-qi in a game-skill style: a 15-frame, 1560 ms animation on a 640×256 world canvas, with character, behind-character and in-front effect layers, an in-place character export and a root-motion table. Labels: no image generation, actual inspection of every frame, no continuous playback (still-only agent), subagent research (3 frame-stepped sources, about 60 minutes) and independent subagent review. The project lives outside this repository. No user acceptance is claimed.
+
+**Gaps found.** The researched charge pose hid one dagger behind both thighs; blocking caught it there, but the same occlusion in the dash frames passed the author's frame review and was first flagged by the reviewer, the bare blade read as a fourth holster knife. A slash fragment left behind the head read as a horn. Scale2x of the flattened composite differed from the stacked layers by up to 46 px per frame, and it exposed effect pixels hidden under the character as specks. Afterimages and slashes crossing the body enclosed space in most composite frames. Three review rounds passed the candidate; the user then saw that the smears and sword-qi did not follow the blades: smears drawn around the current shoulder ended 34–38 px from the previous tip, and the X was a fixed shape off the real paths by up to 47 px. Rebuilt from sampled tip paths, sequential cuts during the dash could not cross as an X, so the cut became a scissor cut; a far-blade smear then vanished because its tip moved along the blade; and the author's first matching check compared the generator's data with itself. Three more review rounds (1, 0, 0 blocking) closed these.
+
+**Changes.** General rules merged into existing references (see CHANGELOG), mostly extending 2.2.0 rules that worked only in part (the provisional researched view, the reviewer's occlusion check, research size, confirming fixes on the rendered result); one scenario added. No script change: `audit`, `export` and `verify-gif` agreed with the agent's own checks.
+
+**Checks.** 22 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
+
+**Limits.** One character and one action more; the new rules have not been rerun as fresh-context evaluations.
+
+---
+
 ## 2.2.0 — 2026-10-20
 
 Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.

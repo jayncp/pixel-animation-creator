@@ -12,13 +12,14 @@ Equal frame durations do not imply uniform speed. Repeated identical poses creat
 
 Choose sufficient key poses to read the action without effects. Plan support-foot planted intervals and swing intervals, pelvis/chest changes, gaze/head intent, hand path, and cloth/appendage following. Keep body volume and limb length stable; explain apparent shortening through depth, not unexplained stretching.
 
-Treat a researched camera view as provisional: block the accent poses (drive, release, contact) in it first, and change the view or the limb path if a moving limb hides the face or a held prop, or cannot reach its target. Example: in three-quarter view a near throwing arm crossed the whole face at release; a side view kept face and hand clear.
+Treat a researched camera view, pose or prop placement as provisional: block the accent poses (drive, release, contact) first, and change the view or the limb path if a moving limb hides the face or a held prop, or cannot reach its target. Example: in three-quarter view a near throwing arm crossed the whole face at release; a side view kept face and hand clear.
 
 Typical choices, not universal recipes:
 
 - Idle: asymmetric breathing/settling, small regional motion, stable feet, delayed hair/cloth. Do not scale the whole body. A single repeating GIF with one blink repeats that blink every cycle; do not claim it is random or independent. Use a longer authored cycle or runtime state machine if nonperiodic behavior is actually requested.
 - Projectile: readable gathering or aim where appropriate, concentrated proximal drive, fast release, brief extension, delayed sleeve motion, longer recovery. The projectile separates at an explicit release event and is no longer attached to the hand afterward; it then keeps its own spacing, so during body holds add effect-only frames instead of freezing it.
 - Barrier/support: a distinct opening accent followed by believable sustained support and small adjustments, not the projectile action in slow motion.
+- Stylized skill: exaggerate through pose range, holds (charge, hit-stop), travel and effects rather than by scaling the sprite. Under binary alpha, afterimages are opaque effect-layer silhouettes (e.g. scanlines), not translucency, and pale effects get a coloured rim so they still read on light backgrounds.
 - Turn/whip: gaze can lead; torso/pelvis rotate and transfer support; hair/tails trail. Add genuinely drawn transition views or local contour transitions where view-card changes pop.
 
 Avoid equal-phase body bobbing and generic smoothstep on every channel. Allow counter-motion and settling with decreasing amplitude. Tune the phase relationships to the action, not a fixed one-frame delay on everything.
@@ -27,7 +28,7 @@ Avoid equal-phase body bobbing and generic smoothstep on every channel. Allow co
 
 Inspect where motion information is missing. Add a pose on a problematic arc, depth transition, large tip jump, or slow recovery, placing it according to the desired path and timing. Retain the neighboring event times when possible. More frames are not automatically smoother or stronger; uniform interpolation can erase the accent and expose distorted source textures for longer.
 
-Use a short smear only if it describes the path and reads at full speed. Do not blur, crossfade whole view cards, or use translucent doubled silhouettes to conceal a turn.
+Use a short smear only if it describes the path and reads at full speed. The path is the part's tip in world coordinates: between keys, sample it swinging around its moving pivot (body travel included), draw the smear from those samples widening toward the pivot, and leave any slash mark or trail in the air on the same path. A tip moving along its own blade, as in a thrust, sweeps almost no area; a visible slash needs a sweeping finish. When the real paths cannot make the wanted shape, change the motion, not the effect's position. Example: two cuts in turn while the body dashes meet as a λ, not an X; a scissor cut in one frame crosses. Do not blur, crossfade whole view cards, or use translucent doubled silhouettes to conceal a turn.
 
 ## Appendage continuity
 

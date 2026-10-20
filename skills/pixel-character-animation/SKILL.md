@@ -4,7 +4,7 @@ description: Generate pixel-character art and animation end to end from text, ge
 license: MIT
 compatibility: Bundled scripts need Python 3.10+ and Pillow 10–12 (requirements.txt); image generation, editors and players are optional and discovered at runtime.
 metadata:
-  version: "2.2.0"
+  version: "2.3.0"
 ---
 
 # Pixel Character Animation
@@ -36,8 +36,8 @@ For a new or materially redesigned action, read [motion-research.md](references/
 - Search online for relevant motion references, pixel or non-pixel. Inspect the actual accessible images/frames/video, not titles or descriptions alone. Record sources, what was observed, and what will be adapted. Respect private-upload and source-media rights. If references cannot be accessed, mark research incomplete and distinguish an explicitly provisional motion plan.
 - Break the reference into support, line of action, pelvis/chest/head, joint trajectories, key events and real-time rhythm. Manual landmarks or a local Blender/IK proxy are legitimate aids; use pose-estimation tools only when actually available and appropriate. Do not claim automatic skeleton extraction or physical validation from a drawn proxy.
 - Retarget intent and normalized trajectories to the character's proportions. Preserve limb lengths, reach, planted contact and volume; adjust angles, steps, torso lean and foreshortening instead of copying a realistic skeleton into a stylized body.
-- Block the action without decorative detail or FX. A researched camera view stays provisional until its accent poses keep the face and held props readable and within reach. Establish readable key poses, support and center-of-mass shifts, anticipation where appropriate, release/accent, extension, recovery and settle. Record event times in milliseconds and deliberate spacing. **No fixed frame-count cap:** author enough poses to convey the action; holds and duplicate exports are not new poses.
-- Keep the strong accent fast and secondary motion offset. Add selective true in-betweens where arcs, depth, view transitions or recovery lose information. Keep named appendage roots/branches/tips continuous in consistent coordinates; attached roots alone do not prevent tail teleportation.
+- Block the action without decorative detail or FX. A researched camera view, pose or prop placement stays provisional until the accent poses keep the face and held props readable and within reach. Establish readable key poses, support and center-of-mass shifts, anticipation where appropriate, release/accent, extension, recovery and settle. Record event times in milliseconds and deliberate spacing. **No fixed frame-count cap:** author enough poses to convey the action; holds and duplicate exports are not new poses.
+- Keep the strong accent fast and secondary motion offset. Add selective true in-betweens where arcs, depth, view transitions or recovery lose information. Keep named appendage roots/branches/tips continuous in consistent coordinates; attached roots alone do not prevent tail teleportation. Draw effects that follow a part (smears, trails, slash marks left in the air) from that part's sampled path, body travel included.
 
 ## C. Refine and validate the actual animation
 
@@ -49,7 +49,7 @@ Use [portable-cli.md](references/portable-cli.md) for audits, sampled trajectory
 
 ## D. Deliver a resumable result
 
-Read [tools-and-delivery.md](references/tools-and-delivery.md). Deliver the requested stage, not an unsolicited full action suite. Save the master/views, PNG frames, timed GIF, sprite sheet + timing JSON, editable native source or explicitly labeled layered fallback, relevant prompts/configuration, source provenance, review/repair evidence and final index. Reopen native files and compare decoded exports by time interval. Preserve character and FX separation.
+Read [tools-and-delivery.md](references/tools-and-delivery.md). Deliver the requested stage, not an unsolicited full action suite. Save the master/views, PNG frames, timed GIF, sprite sheet + timing JSON, editable native source or explicitly labeled layered fallback, relevant prompts/configuration, source provenance, review/repair evidence and final index. Reopen native files and compare decoded exports by time interval. Preserve character and FX separation, by depth layer where effects sit both behind and in front of the character.
 
 Stop when the scoped work has been actually reviewed and materially found defects repaired or disclosed; missing capabilities or permissions become precise blockers, not invented passes. Archive the project so a new conversation can inspect its state and resume. This skill is portable guidance, not permission to install globally, accept licenses, incur costs, upload private art, log in, or publish.
 

@@ -36,7 +36,7 @@ Record observed facts and deliberate decisions separately:
 - appendage count (as a number), branch identity, root locations and tip shapes;
 - palette roles, outline, internal shading/AA and light convention.
 
-Do not force human anatomy onto a creature. If the design has no feet or face, mark those checks not applicable with a reason.
+Do not force human anatomy onto a creature. If the design has no feet or face, mark those checks not applicable with a reason. An action may settle a fact the source leaves uncertain (a grip, an unseen side): label the reading, keep it through the action and note any conflict with existing views.
 
 ## Multi-view construction
 
