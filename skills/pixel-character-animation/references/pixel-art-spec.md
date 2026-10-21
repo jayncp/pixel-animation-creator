@@ -17,7 +17,7 @@ These are style-aware review criteria, not a universal numerical definition of p
 
 **Contours/jaggies:** a smooth intended curve needs deliberate staircase runs. Look for accidental short–long–short jumps and uneven thickness; repair pixel placement locally. Corners, jagged fur and angular fabric do not need monotonically changing runs. “Clean” does not mean abolishing the pixel staircase.
 
-**Banding:** parallel contour/shadow strips can flatten shape or exaggerate stair steps. Describe volume with purposeful clusters instead of stacking equal-width outlines. Do not automatically erase stripes or seams that belong to the design.
+**Banding:** parallel contour/shadow strips can flatten shape or exaggerate stair steps. Describe volume with purposeful clusters instead of stacking equal-width outlines. Do not automatically erase stripes or seams that belong to the design. Evenly spaced, equal-length interior lines (hair strands, folds, fur) also read as a pattern; vary their length, spacing and direction and carry the volume with mid-tones.
 
 **Shading:** use value separation to keep masses readable. Avoid pillow shading that follows every edge regardless of the light. Avoid gradients/dither that obscure a small face or cause temporal shimmer. Dither is available as a deliberate material/style choice, not a default conversion filter.
 
@@ -25,7 +25,7 @@ These are style-aware review criteria, not a universal numerical definition of p
 
 **Palette:** count visible colors, inspect near duplicates, test material separation and contrast. Reducing colors is a reviewed edit, not a quality score. Keep a shared stable palette across views/cels unless illumination/FX change is intentional. Lossy JPEG is not a pixel master.
 
-**Grid consistency:** avoid mixed accidental pixel scales and noninteger blurred transforms. Rotation/resampling of source cards requires cleanup of silhouette, small features and thickness. Do not hide artifacts with global smoothing.
+**Grid consistency:** avoid mixed accidental pixel scales and noninteger blurred transforms. Rotation/resampling of source cards requires cleanup of silhouette, small features and thickness. Do not hide artifacts with global smoothing. A color-preserving 2× such as Scale2x can close new one-pixel holes where thin shapes join only diagonally (blade tips, staircase diagonals, close parallel lines): check enclosed holes at both logical and export size, and give thin shapes 4-connected runs or wider spacing. When layers are upscaled and delivered separately, stack the upscaled layers to make the composite (Scale2x of a flattened image differs where layers meet), clear lower-layer pixels hidden under an upper layer (upscaling trims diagonal corners and exposes them), and seal single-pixel seams where two touching layers both round inward.
 
 ## Reference and temporal consistency
 

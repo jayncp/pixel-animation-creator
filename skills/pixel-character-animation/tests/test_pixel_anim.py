@@ -92,11 +92,28 @@ class PixelAnimationTest(unittest.TestCase):
                 self.assertEqual(actual.size, expected.size)
                 self.assertEqual(pa.visual_bytes(actual), pa.visual_bytes(expected))
 
-    def test_no_implicit_loop(self):
+    def test_loop_by_default_and_opt_out(self):
+        del self.doc["loop"]
+        result = pa.export(self.doc, self.frames, self.root / "default")
+        self.assertEqual(result["gif"]["loop_extension"], 0)
+        self.assertEqual(len(pa.track_report(self.doc)["tracks"]["wrist"]["all_steps"]), 4)
         self.doc["loop"] = False
-        result = pa.export(self.doc, self.frames, self.root / "export")
+        result = pa.export(self.doc, self.frames, self.root / "once")
         self.assertIsNone(result["gif"]["loop_extension"])
         self.assertEqual(len(pa.track_report(self.doc)["tracks"]["wrist"]["all_steps"]), 3)
+
+    def test_cut_seam_is_not_diagnosed_as_motion(self):
+        self.doc["seam"] = "cut"
+        steps = pa.track_report(self.doc)["tracks"]["wrist"]["all_steps"]
+        self.assertEqual(len(steps), 3)
+        self.assertFalse(any(s["loop_seam"] for s in steps))
+        result = pa.audit(self.doc, self.frames, self.root)
+        self.assertEqual(result["loop_seam"], "cut")
+        self.assertIsNone(result["first_last_visible_equal"])
+        self.assertEqual(pa.export(self.doc, self.frames, self.root / "export")["gif"]["loop_extension"], 0)
+        self.doc["seam"] = "jump"
+        pa.dump(self.manifest, self.doc)
+        with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
 
     def test_relocation_cli_from_unrelated_cwd(self):
         target = self.root / "relocated with spaces"
@@ -157,6 +174,24 @@ class PixelAnimationTest(unittest.TestCase):
         self.assertEqual(result["frames_with_undeclared_holes"], [])
         self.assertTrue(result["frames"][0]["enclosed_holes"][0]["declared"])
         self.doc["frames"][0]["design_gaps"] = [[3.5, 3]]
+        pa.dump(self.manifest, self.doc)
+        with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
+
+    def test_identity_colors_and_stale_design_gaps(self):
+        for i, im in enumerate(self.frames):
+            if i != 2:
+                im.putpixel((self.doc["frames"][i]["anchors"]["wrist"][0], 3), (200, 20, 40, 255))
+        self.doc["identity_colors"] = {"gem": ["#c81428"], "lash": ["#010203"]}
+        self.doc["frames"][0]["design_gaps"] = [[0, 0]]
+        self.write(self.root, self.doc, self.frames)
+        doc, frames, root = pa.load_manifest(self.manifest)
+        result = pa.audit(doc, frames, root)
+        self.assertTrue(result["technical_pass"])
+        self.assertEqual([r["identity_counts"]["gem"] for r in result["frames"]], [1, 1, 0, 1])
+        self.assertTrue(any("'gem'" in w and "[2]" in w for w in result["warnings"]))
+        self.assertTrue(any("'lash'" in w and "no frame" in w for w in result["warnings"]))
+        self.assertTrue(any(w.startswith("Frame 0 design_gaps [[0, 0]]") for w in result["warnings"]))
+        self.doc["identity_colors"] = {"gem": ["c81428"]}
         pa.dump(self.manifest, self.doc)
         with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
 

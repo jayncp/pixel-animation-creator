@@ -1,6 +1,6 @@
 # Craft and workflow lineage
 
-Research refreshed2026-10-16. Sources guide decisions; they do not replace inspection of a particular character or action. Detailed adopt/reject rationale and limits are in the repository's `docs/RESEARCH.md`; this reference remains usable when the skill folder is copied alone.
+Research refreshed 2026-10-16. Sources guide decisions; they do not replace inspection of a particular character or action. Detailed adopt/reject rationale and limits are in the repository's `docs/RESEARCH.md`; this reference remains usable when the skill folder is copied alone.
 
 ## Pixel art
 
