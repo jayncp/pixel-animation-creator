@@ -41,6 +41,16 @@ def rgb(code):
     return tuple(int(code[i:i + 2], 16) for i in (1, 3, 5))
 
 
+def loops(doc):
+    """GIFs loop unless the manifest sets "loop": false."""
+    return doc.get("loop", True)
+
+
+def loop_seam(doc):
+    """How the last frame meets the first when looping: "motion", "cut" (a declared jump), or None."""
+    return doc.get("seam", "motion") if loops(doc) else None
+
+
 def load_manifest(path):
     path = Path(path).resolve()
     doc = json.loads(path.read_text(encoding="utf-8"))
@@ -49,6 +59,8 @@ def load_manifest(path):
     for field in ("loop", "binary_alpha"):
         if field in doc and not isinstance(doc[field], bool):
             raise ValueError(f"{field} must be a boolean")
+    if doc.get("seam", "motion") not in ("motion", "cut"):
+        raise ValueError('seam must be "motion" or "cut"')
     if not isinstance(doc.get("topology", []), list) or any(not isinstance(g, dict) for g in doc.get("topology", [])):
         raise ValueError("topology must be an array of objects")
     identity = doc.get("identity_colors", {})
@@ -186,7 +198,7 @@ def track_report(doc):
         now += e["duration_ms"]
     names = sorted({k for e in entries for k in e.get("anchors", {})})
     tracks = {}
-    pair_count = len(entries) if doc.get("loop", False) and len(entries) > 1 else len(entries) - 1
+    pair_count = len(entries) if loop_seam(doc) == "motion" and len(entries) > 1 else len(entries) - 1
     for name in names:
         steps = []
         for i in range(pair_count):
@@ -253,6 +265,9 @@ def audit(doc, frames, root):
         t += d
     for name in identity:
         peak = max(r["identity_counts"][name] for r in records)
+        if not peak:
+            warnings.append(f"Identity color {name!r} appears in no frame; check its color codes and the layer audited")
+            continue
         low = [r["frame"] for r in records if r["identity_counts"][name] * 2 < peak]
         if low:
             warnings.append(f"Identity color {name!r} falls below half its peak of {peak} px in frame(s) {low}; "
@@ -288,8 +303,9 @@ def audit(doc, frames, root):
     return {"technical_pass": not errors, "naturalness": "not_assessed_by_this_script",
             "errors": errors, "warnings": warnings, "canvas": list(frames[0].size),
             "authored_frames": len(frames), "duration_ms": t, "visible_rgb_colors": len(colors),
-            "effective_exact_pose_holds": runs, "loop_requested": bool(doc.get("loop", False)),
-            "first_last_visible_equal": visual_bytes(frames[0]) == visual_bytes(frames[-1]),
+            "effective_exact_pose_holds": runs, "loop": loops(doc), "loop_seam": loop_seam(doc),
+            "first_last_visible_equal": (visual_bytes(frames[0]) == visual_bytes(frames[-1])
+                                         if loop_seam(doc) == "motion" else None),
             "frames_with_undeclared_holes": [r["frame"] for r in records if any(not h["declared"] for h in r["enclosed_holes"])],
             "frames": records, "timing": track_report(doc), "topology": topology,
             "topology_note": "Component/root statistics are diagnostics, not permission to delete small clusters. A connected root does not prove tip continuity.",
@@ -456,7 +472,7 @@ def verify_gif(doc, frames, path):
             encoded.append(gif.convert("RGBA"))
             durations.append(gif.info.get("duration", 0))
         loop = gif.info.get("loop")
-    if (doc.get("loop", False) and loop != 0) or (not doc.get("loop", False) and loop is not None):
+    if (loops(doc) and loop != 0) or (not loops(doc) and loop is not None):
         raise ValueError("GIF loop extension differs from manifest loop setting")
     expected = [e["duration_ms"] for e in doc["frames"]]
     if sum(durations) != sum(expected):
@@ -508,13 +524,13 @@ def export(doc, frames, output_dir, columns=8, no_gif=False, force=False):
             if reread.crop((x, y, x + w, y + h)).tobytes() != expected.tobytes():
                 raise ValueError("Saved sheet differs from source frame")
     dump(out / "sprite_sheet.json", {"schema_version": 1, "image": "sprite_sheet.png",
-         "canvas": list(frames[0].size), "loop": bool(doc.get("loop", False)),
+         "canvas": list(frames[0].size), "loop": loops(doc),
          "duration_ms": t, "frames": entries})
     validation = {"sheet_exact_rgba": True, "sheet_sha256": sha(sheet_path),
                   "naturalness": "not_assessed_by_this_script"}
     if indexed is not None:
         gif_path = out / "animation.gif"
-        structure = write_full_canvas_gif(indexed, durations, gif_path, bool(doc.get("loop", False)))
+        structure = write_full_canvas_gif(indexed, durations, gif_path, loops(doc))
         validation["gif"] = verify_gif(doc, frames, gif_path)
         validation["gif"]["all_frames_full_canvas"] = structure["all_frames_full_canvas"]
         validation["gif"]["encoding"] = "full_canvas_noninterlaced_shared_palette_disposal_2"

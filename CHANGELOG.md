@@ -1,5 +1,28 @@
 # Changelog
 
+## 3.0.0 — 2026-10-21
+
+From a fifth field test, run by two agents in parallel from the same seed. The rogue charges, two afterimages split off, and the body and then each afterimage dash through one point before the body recovers. This closes the series of dagger-skill tests on this character, mostly melee (2.2.0–3.0.0). The next series tests ranged skills.
+
+- **Breaking:**
+  - GIFs loop by default: `loop` defaults to true in `export`, `verify-gif`, `timing` and `audit`. Set `"loop": false` for a play-once GIF.
+  - `audit` reports `loop` and `loop_seam` in place of `loop_requested`, and `first_last_visible_equal` is `null` unless the seam is `"motion"`.
+- Manifest: optional `seam: "cut"` declares that a looping one-shot jumps from its last frame back to its first, so that step is not diagnosed as motion.
+- Audit: warns when a declared identity color appears in no frame.
+- Motion:
+  - figures that carry the choreography (copies of the character, projectiles) join the blocking as placeholders, with every moving silhouette overlaid in world coordinates;
+  - a fresh reviewer looks at the blocked key poses before effects;
+  - contacts and grips are written as data and measured on every rendered frame, for every figure the brief gives them to;
+  - copies of the character read as the character, props in the same hands, with their markers kept out of the body's identity counts;
+  - an effect's visible part reads as that effect: no slivers through gaps in the body, and no front effect covering the face or a holding hand where they should read.
+- Checks:
+  - held props and what they touch are checked in every composite frame, not only accents;
+  - each review round uses a new reviewer who sees the whole clip;
+  - revisions are aligned before diffing.
+- Research:
+  - frame extraction starts from an overview and keeps only cropped intervals;
+  - footage from another camera sets timing and effects, not poses.
+
 ## 2.4.0 — 2026-10-21
 
 From a fourth field test: the same rogue charges, throws a spinning dagger, blinks to it, catches it and slams down. The owner changed it mid-test to a forward-up throw and a vertical slam.

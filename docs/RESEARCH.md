@@ -32,15 +32,15 @@ This research pass inspected accessible article text and links; linked tutorial 
 | [OpenAI hatch-pet](https://github.com/openai/skills/blob/main/skills/.curated/hatch-pet/SKILL.md) | Canonical identity, artifact-backed completion, deterministic atlas geometry | App-specific dimensions/states/FX rules imposed on general animation |
 | [Anthropic skill-creator](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md) | Isolated realistic evaluation, old/new baseline, objective and qualitative checks | Numeric pass rates as proof of beauty/naturalness |
 
-An attempted current official develop-web-game skill URL returned404; mirrors were not treated as current official evidence. These are operational patterns, not independent evidence that any cited skill reliably produces excellent pixel animation.
+An attempted current official develop-web-game skill URL returned 404; mirrors were not treated as current official evidence. These are operational patterns, not independent evidence that any cited skill reliably produces excellent pixel animation.
 
 ## Tool findings
 
-- Existing Codex CLI0.159.2 help was inspected; no dedicated image-generation subcommand. `--image` is an input option, not evidence of generation access.
+- Existing Codex CLI 0.159.2 help was inspected; no dedicated image-generation subcommand. `--image` is an input option, not evidence of generation access.
 - Existing image adapter dry-run succeeded without a live API call; it did not create an image. Model/transparent-output capability differs across interfaces/versions, so inspect the chosen route instead of hardcoding a universal model assertion.
 - Community [Vollkorn-Games Aseprite MCP](https://github.com/Vollkorn-Games/aseprite-mcp), reviewed commit28900e757d7e5c18515ad0a95558acde1865aad2, previously supported actual native pixel/cel editing and export in this experiment. It is not an official Aseprite product. Its license does not grant permission to redistribute Aseprite itself.
-- Aseprite1.3.18.6-dev version check worked with local XDG configuration; a default config attempt failed on filesystem permissions. No new installation or license acceptance occurred.
-- Blender4.3.2 help/version and prior actual armature/projection scripts support the optional local proxy route. A proxy is not automatic mocap, texture synthesis or a naturalness certificate.
+- Aseprite 1.3.18.6-dev version check worked with local XDG configuration; a default config attempt failed on filesystem permissions. No new installation or license acceptance occurred.
+- Blender 4.3.2 help/version and prior actual armature/projection scripts support the optional local proxy route. A proxy is not automatic mocap, texture synthesis or a naturalness certificate.
 - MCP config examples were parsed, not activated. Other operating systems, clients and live API providers were not all tested.
 
 Tool sources and project-scoped templates are in the skill's [tool adapter reference](../skills/pixel-character-animation/references/tool-adapters.md). No third-party code, tutorial media or tool binaries are redistributed here.

@@ -28,4 +28,4 @@ The first three commits use a local non-personal author label; later commits use
 
 ## Coverage boundaries
 
-Unit tests validate deterministic helpers, not artistic quality. A real reference-generation smoke test covers only its actual subject/style/provider. Passing one existing-character action cannot establish universal new-character or new-action reliability. Keep challenging motion, camera and proportion examples in the evaluation backlog rather than claim unsupported generalization.
+Unit tests validate deterministic helpers, not artistic quality. A real reference-generation smoke test covers only its actual subject/style/provider. Passing one existing-character action cannot establish universal new-character or new-action reliability. Keep challenging motion, camera and proportion examples in the evaluation backlog rather than claim unsupported generalization. Field tests through 3.0.0 cover one front-view spell cast and a series of side-view dagger skills, mostly melee, on one character; ranged skills are next.

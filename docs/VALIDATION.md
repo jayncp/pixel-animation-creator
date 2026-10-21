@@ -1,5 +1,60 @@
 # Validation records
 
+## 3.0.0 — 2026-10-21
+
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0, ImageMagick 7.1.2.
+
+**Field test.** Two agents used 2.4.0 in parallel from the same read-only seed (identity, side view, char-map parts, earlier scripts) on one task: a sprint-start charge, two grey afterimages split off, the body and then each afterimage dash through one point, then the body recovers and the afterimages vanish, in a game-skill style.
+
+| Side | Agent | Result | Time | Review rounds (blocking faults) |
+| --- | --- | --- | --- | --- |
+| a | Claude Code, one agent with subagent reviewers | 21 frames, 1660 ms, 368×128 logical | about 2 h | 3 → 1 → 0 |
+| b | ChatGPT Work cloud multi-agent | 29 frames, 2200 ms, 448×160 logical | about 43 min | an early review of the blocked poses, then 2 → 0 → an 8-pixel spot-check, all by one reviewer |
+
+Both sides: no image generation, actual inspection of every frame, and no continuous playback (still-only agents; b's browser failed to start). Both researched with official ability videos. The projects live outside this repository. No user acceptance is claimed. The owner judged b's result about right and left both sides' non-blocking details unfixed.
+
+**2.4.0 changes.** Merged verdicts from both sides:
+
+| Change | Verdict | Notes |
+| --- | --- | --- |
+| Identity-color counts | Worked | They cannot see adjacency, and a marker absent from every frame went unwarned. |
+| Stale-gap warnings | Worked | Shown on b's fixture. |
+| Rendered-pixel contacts | Worked in part | A zero-error solver still left a sole 1 px above the ground. Afterimages first reached the point only with a blade tip. |
+| Effect-path lines | Worked in part | They covered tips only. b drew them alongside the first effects, not before. |
+| Effect causes measured on rendered pixels | Necessary, not sufficient | Both sides' worst effect faults passed them. |
+| Variant ordering, revision diffs, official ability videos | Worked | |
+| Thrown-object layering | Not exercised | |
+
+**Gaps found.**
+
+- Afterimages. Both sides independently made the same thing: value-mapped grey copies with props in the same hands. The skill had suggested flat silhouettes.
+- Effect faults that cause-and-visibility checks passed:
+  - a: back-layer slivers through gaps in the body read as a ribbon;
+  - b: a front flash covered an afterimage's face and hand.
+- Held props. On side a, daggers read as held by the wrong hand in transition frames over two review rounds. The adjacency rule sat under "accent frames".
+- Early review. b's review of the blocked poses caught a dagger read as guarding the face. a found the same fault only after effects were added.
+- Review rounds. b's reviewer, reused across rounds, rechecked only its own findings.
+- Revision diffs after a canvas shift showed every pixel as changed.
+- Frame dumps of whole videos took 1.4 GB.
+
+**Changes.**
+
+- The owner set looping GIFs as the default; `seam: "cut"` keeps a travelling one-shot's restart out of motion diagnostics.
+- The other findings were merged into existing rules, each as a problem class with at most one example.
+- Choices the brief left open stay open: whether the target mark persists, how afterimages dissolve, how strong the effects are.
+- One scenario was added.
+- A fresh subagent then reviewed the whole skill. Fixed:
+  - contradictions, e.g. the reviewer gate was named "candidate" both with and without a reviewer;
+  - rules repeated between SKILL.md and the references;
+  - over-specific wording;
+  - missing-space typos in older records.
+
+**Checks.** 24 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
+
+**Limits.** One character. This closes the dagger-skill series, mostly melee; ranged skills come next. The new rules have not been rerun as fresh-context evaluations.
+
+---
+
 ## 2.4.0 — 2026-10-21
 
 Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.
@@ -70,7 +125,7 @@ Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outsi
 
 ## 2.1.0 — 2026-10-19
 
-Environment: macOS 26.0.1 arm64, Python3.12.12 in a project-local uv venv outside this repository, Pillow12.3.0, ImageMagick7.1.2.
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0, ImageMagick 7.1.2.
 
 **Field test.** An agent used 2.0.0 end to end on a user-supplied 96×96 three-tailed character: 256×256 front/three-quarter/side/back views, motion research, and an 18-frame, 1500 ms front-view spell cast. Labels: actual generation (three Codex CLI 0.162.0-alpha calls through the app-bundled CLI, about 65 s each, RGB output at model-chosen sizes, files written under the Codex home and copied in), actual inspection of every view and frame, sampled browser playback matched to frames, and independent subagent review rounds. The project lives outside this repository. No user acceptance is claimed.
 
@@ -88,19 +143,21 @@ Environment: macOS 26.0.1 arm64, Python3.12.12 in a project-local uv venv outsid
 
 # Validation record — 2.0.0
 
-Final source validation completed2026-10-16. Artistic and technical outcomes are deliberately separate.
+Historical. The stage helper, release packager and hash manifests described here were removed in 2.1.0.
+
+Final source validation completed 2026-10-16. Artistic and technical outcomes are deliberately separate.
 
 ## Environment and baseline
 
-Python3.12.14; Pillow12.3.0. Declared support is Python3.10+ and Pillow10–12, not a claim that every minor version or OS was exercised. Existing exporter regression tests were retained. No new software, external paid provider, login or global configuration was required.
+Python 3.12.14; Pillow 12.3.0. Declared support is Python 3.10+ and Pillow 10–12, not a claim that every minor version or OS was exercised. Existing exporter regression tests were retained. No new software, external paid provider, login or global configuration was required.
 
 ## Real prior-project regression
 
-The current helper audited and re-exported actual V7 idle native-output PNGs:30 authored frames,3000ms,256×256. The new GIF retained all30 exposures with full-canvas descriptors and exact visible RGBA by all30 intervals; sprite-sheet RGBA was exact. New GIF SHA-256:67fd8582f65b1db33588f88214bfcd47e2f581bb983cf2bb041b33b93e08bee3. This is a technical regression, not a new naturalness assessment or new playback claim.
+The current helper audited and re-exported actual V7 idle native-output PNGs: 30 authored frames, 3000 ms, 256×256. The new GIF retained all 30 exposures with full-canvas descriptors and exact visible RGBA by all 30 intervals; sprite-sheet RGBA was exact. New GIF SHA-256: 67fd8582f65b1db33588f88214bfcd47e2f581bb983cf2bb041b33b93e08bee3. This is a technical regression, not a new naturalness assessment or new playback claim.
 
 ## Independent review findings retained
 
-An initial independent routing review found: old128×128 legacy size defaulted to256; passed artifact records ignored stale hashes; imported candidates awaiting review routed back to intake; Boolean schema_version passed as1. These are documented failures, not hidden by later successful tests. All four were fixed and independently rerun:128 size preserved; stale/missing completed hashes rejected; imported pending reviews stay at their own stage; Boolean schema rejected. An additional independent probe confirmed a changed declared input hash blocks ready delivery even with unchanged outputs. Checks cover declared hashes/snapshots, not undeclared semantic dependencies or the truth of visual judgments.
+An initial independent routing review found: old 128×128 legacy size defaulted to 256; passed artifact records ignored stale hashes; imported candidates awaiting review routed back to intake; Boolean schema_version passed as 1. These are documented failures, not hidden by later successful tests. All four were fixed and independently rerun: 128 size preserved; stale/missing completed hashes rejected; imported pending reviews stay at their own stage; Boolean schema rejected. An additional independent probe confirmed a changed declared input hash blocks ready delivery even with unchanged outputs. Checks cover declared hashes/snapshots, not undeclared semantic dependencies or the truth of visual judgments.
 
 ## Scope limitations
 
@@ -108,7 +165,7 @@ No claim of general one-shot quality, universal multi-view consistency, automati
 
 ## Final checks
 
--40 Python tests passed:19 retained image/export tests and21 stage-routing tests. ImageMagick independent decoder test ran successfully; none skipped in this environment.
+- 40 Python tests passed: 19 retained image/export tests and 21 stage-routing tests. ImageMagick independent decoder test ran successfully; none skipped in this environment.
 - Skill frontmatter/name validator passed; repository local-link/JSON checks passed.
 - Project MCP TOML and client-neutral JSON templates parsed. They remain inactive and contain placeholders.
 - Real V7 idle regression passed as described above.
@@ -117,6 +174,6 @@ No claim of general one-shot quality, universal multi-view consistency, automati
 
 ## Release restoration procedure
 
-The release is built from a clean commit and independently extracted into a new directory. Acceptance commands: git status --short (empty), git fsck --full, git log --oneline (import + revision history), all40 tests and scripts/validate_repo.py. The packager does not include remotes, hooks, credentials or ignored runtime directories. File hashes are in CONTENT_MANIFEST.sha256; archive SHA is recorded with the delivered release, outside its contents.
+The release is built from a clean commit and independently extracted into a new directory. Acceptance commands: git status --short (empty), git fsck --full, git log --oneline (import + revision history), all 40 tests and scripts/validate_repo.py. The packager does not include remotes, hooks, credentials or ignored runtime directories. File hashes are in CONTENT_MANIFEST.sha256; archive SHA is recorded with the delivered release, outside its contents.
 
 Release restoration is checked after packaging; if a step fails the archive is not delivered as verified. No cross-platform or live-provider equivalence is implied.
