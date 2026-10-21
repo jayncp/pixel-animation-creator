@@ -1,6 +1,6 @@
 # Motion reference, skeleton reasoning and proportion-aware adaptation
 
-Use this stage for a new or substantially redesigned action. An edge-only repair with a clear source does not require repeating unrelated research. Keep research bounded to the requested action, not a broad inspiration dump: by default 3–5 sources you can actually step through frame by frame: drawn, pixel or game footage, plus live action when weight or contact is in question (a stylized skill may need none). Game wikis and sprite archives often block automated fetching; after two blocked sites, switch to asset-store previews, publisher trailers or developer posts. Stop when the key events and their timing are covered.
+Use this stage for a new or substantially redesigned action. An edge-only repair with a clear source does not require repeating unrelated research. Keep research bounded to the requested action, not a broad inspiration dump: by default 3–5 sources you can actually step through frame by frame: drawn, pixel or game footage, plus live action when weight or contact is in question (a stylized skill may need none). Game wikis and sprite archives often block automated fetching; after two blocked sites, switch to asset-store previews, publisher trailers, the ability or move videos on a game's official pages (often direct video files that step frame by frame) or developer posts. Stop when the key events and their timing are covered.
 
 ## Observe, then design
 

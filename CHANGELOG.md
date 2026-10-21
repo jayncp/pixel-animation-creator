@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.4.0 — 2026-10-21
+
+From a fourth field test: the same rogue charges, throws a spinning dagger, blinks to it, catches it and slams down. The owner changed it mid-test to a forward-up throw and a vertical slam.
+
+- Audit: optional `identity_colors` counts small identity markers per frame and warns where one falls below half its peak; declared `design_gaps` that lie in no enclosed region are reported as stale.
+- Motion:
+  - contacts are confirmed on rendered pixels and read as the intended kind, with rig shortfalls reported;
+  - paths that effects will follow are drawn as lines while blocking;
+  - a thrown object leaves along the hand's velocity, not the arm;
+  - each effect's cause is recorded and measured against the rendered part, and every effect stays visible in the composite;
+  - secondary-motion variants read as the same part and are ordered as a decay, without A/B/A flicker.
+- Checks: identity-color counts plus what each held prop touches, recounted after every fix; each revision is diffed against the previous one before review.
+- Research: official ability and move videos as a source.
+- Delivery: an object that leaves the character gets its own layer, with a held-plus-in-flight count per frame.
+
 ## 2.3.1 — 2026-10-20
 
 From the owner's review after the third field test. Guidance only; scripts and tests are unchanged.

@@ -160,6 +160,23 @@ class PixelAnimationTest(unittest.TestCase):
         pa.dump(self.manifest, self.doc)
         with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
 
+    def test_identity_colors_and_stale_design_gaps(self):
+        for i, im in enumerate(self.frames):
+            if i != 2:
+                im.putpixel((self.doc["frames"][i]["anchors"]["wrist"][0], 3), (200, 20, 40, 255))
+        self.doc["identity_colors"] = {"gem": ["#c81428"]}
+        self.doc["frames"][0]["design_gaps"] = [[0, 0]]
+        self.write(self.root, self.doc, self.frames)
+        doc, frames, root = pa.load_manifest(self.manifest)
+        result = pa.audit(doc, frames, root)
+        self.assertTrue(result["technical_pass"])
+        self.assertEqual([r["identity_counts"]["gem"] for r in result["frames"]], [1, 1, 0, 1])
+        self.assertTrue(any("'gem'" in w and "[2]" in w for w in result["warnings"]))
+        self.assertTrue(any(w.startswith("Frame 0 design_gaps [[0, 0]]") for w in result["warnings"]))
+        self.doc["identity_colors"] = {"gem": ["c81428"]}
+        pa.dump(self.manifest, self.doc)
+        with self.assertRaises(ValueError): pa.load_manifest(self.manifest)
+
     def test_edge_diff_pairs_frames_by_time_after_inserting_a_frame(self):
         before = {"frames": [{"duration_ms": 100}, {"duration_ms": 100}]}
         after = {"frames": [{"duration_ms": 100}, {"duration_ms": 40}, {"duration_ms": 60}]}

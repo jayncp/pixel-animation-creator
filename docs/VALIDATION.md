@@ -1,5 +1,29 @@
 # Validation records
 
+## 2.4.0 — 2026-10-21
+
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0.
+
+**Field test.** An agent used 2.3.1 to continue the same rogue (files copied from the earlier projects, which stayed read-only) into a side-view charge, spinning dagger throw, blink to the dagger with a catch, and a slam that stabs it into the ground, in a game-skill style. After six revisions the owner asked for a forward-up throw and a vertical slam, and the review count restarted. The candidate is 26 frames and 1790 ms on a 480×496 world canvas, with character, flying-dagger, behind-character and in-front effect layers, an in-place character export and a root-motion table. Labels: no image generation, actual inspection of every frame, no continuous playback (still-only agent), subagent research (4 frame-stepped sources, about 20 minutes) and five independent subagent review rounds (2, 1, 1, 1, 0 blocking). The project lives outside this repository. No user acceptance is claimed.
+
+**2.3.1 rules.**
+- Effects tied to their cause: worked, and found the most defects once each cause was written as data and measured on rendered pixels.
+- Secondary parts following momentum: worked only in part. Variants were assigned per frame, but drawn variants read as a hat or as horns, and small moves switched variants back and forth.
+
+**Gaps found.** Occlusion misreads passed the author's frame review again (the 2.2.0 and 2.3.0 rule): a raised arm covered the eye, and three of the five blocking faults were regressions introduced by fixes. In one, the blue gem's pixel count was fine, but the dagger lay against the other wrist and read as one hand holding two. The two-bone IK clamped an unreachable stab target without warning, leaving the blade 5 px above the ground its cracks were drawn on. A throw released with the arm pointing along the flight left the swing smear hooking backward. A spin smear was erased whole by the rule that clears effects off the body. Twice a failed edit step still ran the build, producing a revision equal to the old one or half edited. Declared `design_gaps` went stale after pose changes without a warning.
+
+**Changes.**
+- The new `audit` options (see CHANGELOG), checked on the field project's real frames:
+  - Identity-color counts flagged the covered eye of the first reviewed revision (lash 28 → 7–11 px in three frames). On the candidate they flagged only the blink frames, where the body is hidden by design.
+  - The stale-gap check found one stale point in the candidate (frame 15) that the author's manual recheck had missed.
+- The other findings were merged into existing rules, each with at most one example, and one scenario was added.
+
+**Checks.** 23 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed.
+
+**Limits.** One more character and action; the new rules have not been rerun as fresh-context evaluations. Identity-color counts flag covered markers, not misleading adjacency.
+
+---
+
 ## 2.3.1 — 2026-10-20
 
 **Source.** The owner asked whether the skill stresses effect–motion consistency and asked for secondary parts to follow pronounced momentum. 2.3.0 tied part-following effects to sampled paths and projectiles to their release, but had no general rule tying every effect to its causing event, and covered hair and cloth only in passing (idle, sleeves, turns, long appendages). In the third field test the first review round found hair back in its rest shape while the body still dashed. Two short rules and one review item were added; one scenario gained two checks.
