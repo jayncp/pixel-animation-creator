@@ -4,9 +4,9 @@ The stages are evidence boundaries, not a conveyor belt that always starts over.
 
 | Entry | First useful work | Reuse / do not assume |
 | --- | --- | --- |
-| Text description | Resolve brief, generate design candidate, pixel-author target-size master | Do not borrow the companion character or invent its clothing |
+| Text description | Resolve brief, generate design candidate, pixel-author the master on the character's grid | Do not borrow the companion character or invent its clothing |
 | General image | Inspect and record identity; pixel reinterpretation | Do not equate resize/quantization with finished pixel art |
-| Pixel reference | Assess grid, dimensions and identity; adapt only if needed | Preserve accepted palette and features; 256 is a new-project default |
+| Pixel reference | Assess grid, dimensions and identity; adapt only if needed | Preserve accepted palette, features and grid; a larger delivered size is usually an export scale |
 | Accepted multi-view set | Check actual references and alignment, then action research | Do not redo accepted views unnecessarily |
 | Action request + master only | Research movement and identify missing angles, supply those views | Research may precede the missing-view pass; final pose authoring needs reliable views |
 | Motion rough / rig | Inspect actual timing, support, views and layers; improve missing gates | Imported keys do not prove weight or continuity |
@@ -23,7 +23,7 @@ A short repair need not adopt a new record format. When entering mid-pipeline, m
 ### Practical handoff examples
 
 - “Use this skill with my description to produce a 256×256 front/side/back reference set only.” Stop at reviewed views.
-- “Use these accepted 128×128 sprites; animate a jump.” Preserve 128, research jump phases, adapt support/reach, then animate.
+- “Use these accepted 128×128 sprites; animate a jump.” Keep the 128 grid (the canvas may widen for the jump), research jump phases, adapt support/reach, then animate.
 - “This GIF has a detached sleeve at 840 ms.” Inspect the GIF/source and repair locally; do not regenerate the face or retime unrelated action.
 - “Export these cels at the provided durations.” Validate and export; do not claim previously unperformed motion review.
 

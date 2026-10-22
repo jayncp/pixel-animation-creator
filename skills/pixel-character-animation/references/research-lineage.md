@@ -1,12 +1,16 @@
 # Craft and workflow lineage
 
-Research refreshed 2026-10-16. Sources guide decisions; they do not replace inspection of a particular character or action. Detailed adopt/reject rationale and limits are in the repository's `docs/RESEARCH.md`; this reference remains usable when the skill folder is copied alone.
+Research refreshed 2026-10-22. Sources guide decisions; they do not replace inspection of a particular character or action. Detailed adopt/reject rationale and limits are in the repository's `docs/RESEARCH.md`; this reference remains usable when the skill folder is copied alone.
 
 ## Pixel art
 
 - [Cure, Pixel Art Tutorial](https://pixeljoint.com/forum/forum_posts.asp?TID=11299): purposeful palettes, clusters, banding. No universal palette count; intentional isolated detail can be valid.
 - [Saint11, Cluster Sketching](https://saint11.art/pixel_art_articles/article2/): mass-first construction and deliberate edge steps.
 - [Saint11, Anti-Alias and Banding](https://saint11.art/pixel_art_articles/article5/): style-aware manual AA, not general blur or automatic contour bands.
+- [Saint11, Pixel Art Tutorials](https://saint11.art/blog/pixel-art-tutorials/) (Resizing, Outlines, effect cards): redraw rather than rescale; outlines cost space at low resolution; effect onset and dissolve sequences. Card timings are examples.
+- [Lospec, Pixel Art Outlines](https://lospec.com/articles/pixel-art-outlines/) and [Pixel Parmesan, Choosing the Right Resolution](https://pixelparmesan.com/choosing-the-right-resolution-for-your-pixel-art/): outlines exist for contrast; the smallest necessary detail (usually the eyes) sets the resolution.
+- [xccds, Pixel Art Book](https://github.com/xccds/pixel-art-book) (Chinese, for programmers): craft rules stated as measurable checks. Its numbers are starting hints, not pass marks.
+- [McGuire & Gagiu, MMPX Style-Preserving Pixel Art Magnification](https://jcgt.org/published/0010/02/04/) (2021): a color-preserving 2× that keeps corners and single pixels, compared with EPX/Scale2x, hqx and xBR.
 - [SLYNYRD, Human Anatomy](https://www.slynyrd.com/blog/2019/5/21/pixelblog-17-human-anatomy) and [Realistic Anatomy](https://www.slynyrd.com/blog/2024/3/25/pixelblog-49-realistic-human-anatomy): gesture/wireframe/masses and cross-view landmarks. Do not hardcode their six/eight-head examples.
 
 ## Animation

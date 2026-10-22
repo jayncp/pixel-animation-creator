@@ -23,8 +23,8 @@ The generic helpers provide diagnostics and exact exports, not a universal rig o
 Deliver the scope requested, usually:
 
 - Master/reference identity sheet and a small project resume profile.
-- Authoritative final index with action, file paths, authored duration, and known limitations.
-- Character PNG sequence; separate FX where used, one layer per depth (behind / in front of the character) with the stacking order; an object that leaves the character (a thrown weapon) on its own layer or a named one, with its release and return frames, and per frame the count held by the character plus in flight matching the identity sheet; timed GIF, looping unless the user asks otherwise; sprite sheet + JSON. For a travelling action, in-place character frames with a per-frame root table and/or a wide canvas, and the effects' coordinate space (attached or world).
+- Authoritative final index with action, file paths, authored duration, pixel grid, export scale and method, and known limitations (e.g. one-sided parts change sides, and the light flips, if a game mirrors the sprite to face the other way).
+- Character PNG sequence (the 1× master, plus export-scale copies when used); separate FX where used, one layer per depth (behind / in front of the character) with the stacking order; an object that leaves the character (a thrown weapon) on its own layer or a named one, with its release and return frames, and per frame the count held by the character plus in flight matching the identity sheet; timed GIF, looping unless the user asks otherwise; sprite sheet + JSON. For a travelling action, in-place character frames with a per-frame root table and/or a wide canvas, and the effects' coordinate space (attached or world).
 - Native editable source, or clearly labeled layered-source fallback if permitted.
 - Action timeline/configuration, source assets, reproducible scripts and dependency notes.
 - Short visual/technical review log and relevant validation evidence.

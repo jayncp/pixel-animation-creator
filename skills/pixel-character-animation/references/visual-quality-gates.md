@@ -4,7 +4,7 @@
 
 1. **Identity:** face, eyes, hair, ears, clothing, footwear, silhouette, and actual anatomy. Inspect source and output side by side at matched character height. Check discrete facts (counts, sides, presence of details) separately from drawing quality: a clean back view showing two of three tails is still wrong.
 2. **Motion:** recognizability without FX, support and weight, contacts that actually land, event accent, timing/spacing, proximal drive, follow-through (hair and clothing answer the body's momentum), depth, loop seam, and effects that start at their causing event and follow their driver.
-3. **Pixels through time:** coherent clusters, deliberate staircase contours, stable small features, no source fragments, holes, crawling outlines, or unexplained volume changes.
+3. **Pixels through time:** coherent clusters, deliberate staircase contours, stable small features, no source fragments, holes, crawling outlines, or unexplained volume changes. A part that does not move keeps identical pixels from frame to frame, and one that only translates matches once shifted back; other 1 px changes (outline pixels jittering, a high-contrast pixel blinking, an edge creeping) are noise unless planned (breathing, settle, hit shake).
 4. **Export:** layers, frame order, size, transparency, colors, exposures, sheet reconstruction, and final decoded playback.
 
 Separate written judgments. “Technical checks pass; sleeve motion still feels rigid at 1.1–1.4 seconds” is useful. “All checks pass, 95% natural” is not.
@@ -16,6 +16,8 @@ The author misses their own regressions. Before delivering views or an animation
 ## Edge cleanup is local and temporal
 
 Inspect against checkerboard, light, and dark backgrounds at native size and integer nearest-neighbor zoom. Test actual alpha, not the viewer's checkerboard illusion. For deliberately crisp sprites, preserve binary transparency. Allow a different alpha policy only if the art brief actually calls for it.
+
+Looking at an image shows structure but miscounts single pixels. Let a script list pixel-level suspects (L-corners on 1 px lines, orphan pixels, colors off the palette, changes in parts that should be static; `audit` covers colors and holes, the rest needs a project script), then look at each in context; judge silhouette, face, hands and focus by eye.
 
 Identify the cause before removing pixels:
 

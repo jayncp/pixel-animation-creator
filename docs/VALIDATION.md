@@ -1,5 +1,17 @@
 # Validation records
 
+## 3.0.1 — 2026-10-22
+
+No field test. The changes come from a research pass (owner's sources, three web tracks, five experiments on the 3.0.0 field-test rogue, kept outside this repository) and the owner's definition of grid, canvas and export scale. The owner kept Scale2x as the default export enlargement, with nearest neighbor when a direct export is asked, and asked for a README section on defaults and choices.
+
+**Evidence behind the rules.** A recolor-only outline pass fixed a rotated boot's doubled staircase with the silhouette unchanged. Recovering a generated guide's grid worked; reducing it to the target size broke outlines, eyes and the three thigh knives and turned green spill into brown specks, and protected-role voting beat a plain majority on orphan pixels. A port of MMPX matched the delivered Scale2x output exactly on its EPX path; Scale2x rounded the 3×4 fist and blade tips, MMPX kept them, both palette-exact with binary alpha and no new holes on 21 frames.
+
+Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0, ImageMagick 7.1.2.
+
+**Checks.** 24 Python tests passed, none skipped; `scripts/validate_repo.py` passed; `claude plugin validate .` passed (Claude Code 2.1.296). A fresh subagent reviewed the changed text; its findings were applied: old size wording in unchanged files, the CLI's gap coordinates, sizes that are not a multiple of the grid, effect edges against the outline strategy, the recolor pass's limits and numbers inside rules.
+
+**Limits.** Documentation only; no helper changed. The new rules have not been rerun as fresh-context evaluations, and the experiments cover one character.
+
 ## 3.0.0 — 2026-10-21
 
 Environment: macOS 26.0.1 arm64, Python 3.12.12 in a project-local uv venv outside this repository, Pillow 12.3.0, ImageMagick 7.1.2.

@@ -4,7 +4,7 @@ description: Generate pixel-character art and animation end to end from text, ge
 license: MIT
 compatibility: Bundled scripts need Python 3.10+ and Pillow 10–12 (requirements.txt); image generation, editors and players are optional and discovered at runtime.
 metadata:
-  version: "3.0.0"
+  version: "3.0.1"
 ---
 
 # Pixel Character Animation
@@ -15,8 +15,8 @@ Own the full path from a user's idea to reviewed pixel art and animation. Start 
 
 1. Inspect supplied images, archives, and existing final indices. Read `START_HERE.md` / `project_resume.json` when supplied; resolve paths from their containing directory. Never select a final merely by the largest version number. Preserve original assets and work in a new revision.
 2. Establish the requested deliverable and entry point: text, ordinary image, pixel image, accepted views, motion draft, repair, or export. Read [stages-and-entry.md](references/stages-and-entry.md). Reuse valid upstream work; repair only missing or invalid prerequisites. Imported evidence can satisfy a prerequisite without regenerating it.
-3. Default **new character/reference canvases to 256 × 256 pixels per view**, unless the user specifies otherwise. For an existing project, preserve its established size unless asked to migrate. This is a working default, not a scientific minimum or a guarantee of detail. Decide animation/FX bounds separately and record them; do not silently shrink the actor to fit a projectile.
-4. Keep a compact project record — `START_HERE.md`, `project_resume.json` and a final index — covering source roles, identity, size, palette/style, views and provenance, action intent, each stage's status with its review evidence, final files, and limitations ([resume-or-new.md](references/resume-or-new.md)). Existing projects do not need conversion merely to receive a small repair.
+3. Fix the character's **pixel grid** when its reference is made, one cell per pixel: from the user's pixel reference or requested size, otherwise a **256 × 256 canvas per view** for a new character. For an existing project, preserve its grid unless asked to migrate. Animation/FX canvases change with the content and are recorded; the character keeps its grid and is never shrunk to fit a projectile. A larger export is an integer scale of the finished frames that leaves the grid unchanged (a 128 canvas at 2× is 256): Scale2x by default, nearest neighbor when the user asks for a direct export. A finer or coarser grid means redrawing. Read [pixel-scale.md](references/pixel-scale.md) when sizes change or a generated image is brought onto the grid.
+4. Keep a compact project record — `START_HERE.md`, `project_resume.json` and a final index — covering source roles, identity, pixel grid/canvas/export scale, palette/style, views and provenance, action intent, each stage's status with its review evidence, final files, and limitations ([resume-or-new.md](references/resume-or-new.md)). Existing projects do not need conversion merely to receive a small repair.
 5. Discover actual tools before choosing a route. Read [tool-adapters.md](references/tool-adapters.md) when generation, native editing, skeleton aids, or setup is needed. Prefer built-in image generation when exposed, existing local tools, and project-local configuration. A binary's presence is not proof of its capabilities, authentication, or free usage.
 
 ## A. Create a pixel identity and reference views
@@ -24,9 +24,9 @@ Own the full path from a user's idea to reviewed pixel art and animation. Start 
 Read [character-design.md](references/character-design.md) and [pixel-art-spec.md](references/pixel-art-spec.md).
 
 - **Text:** use available image generation to develop a reference from the description, preserving explicit requirements. Do not substitute an unrelated old character. If generation is unavailable, check supported alternatives and permissions; report an actual capability gap rather than claim generation occurred.
-- **General artwork:** inspect the source, extract defining features, and reinterpret them as deliberate pixel clusters at the target size. A downsampled painting is only an intermediate.
-- **Pixel artwork:** preserve its design/grid/palette; adapt size with intentional re-authoring where necessary, not smoothing or a distorted stretch.
-- Lock a master, identity checklist and palette before deriving views. For a full new reference-set request with no angles specified, start with front, three-quarter, side, and back; disclose that choice. Respect requested subsets and existing accepted views. Add other angles only when useful to the scope. Image generation may assist unseen views; refine them back into target-size pixel art. Label inferred and mirrored views, and check asymmetric details rather than automatically mirror them.
+- **General artwork:** inspect the source, extract defining features, and reinterpret them as deliberate pixel clusters on the chosen grid. A downsampled painting is only an intermediate.
+- **Pixel artwork:** preserve its design/grid/palette. A different grid is redrawn (finer adds detail, coarser compresses), not smoothed or stretched.
+- Lock a master, identity checklist and palette before deriving views. For a full new reference-set request with no angles specified, start with front, three-quarter, side, and back; disclose that choice. Respect requested subsets and existing accepted views. Add other angles only when useful to the scope. Image generation may assist unseen views; refine them back into pixel art on the character's grid. Label inferred and mirrored views, and check asymmetric details rather than automatically mirror them.
 - Compare actual views at matched scale for eyes/face, silhouette, hair, costume construction, footwear, accessories, anatomy, ground line, light direction and perspective. Check discrete identity facts — counts of repeated parts, the side of asymmetric parts, presence of small details — in every view; generated guides break them even when the brief states them. Inspect native-size and enlarged pixels on light/dark backgrounds. Clean contours, cluster noise and palette redundancy without removing identity. Finish this gate before relying on the views to animate.
 
 ## B. Research and construct the action

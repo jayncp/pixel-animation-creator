@@ -19,6 +19,22 @@ Accessed 2026-10-16. This is a paraphrased synthesis, not copied tutorial or ski
 
 This research pass inspected accessible article text and links; linked tutorial media could not all be visually retrieved. It does not claim a new frame-by-frame video analysis of those examples. The runtime skill explicitly requires actual accessible motion-reference observation for a new action. Multi-view consistency and character-specific physical plausibility remain judgments on actual project images, not conclusions supplied by general tutorial text.
 
+## Pixel detail and scale
+
+Accessed 2026-10-21. A research pass on outline and color craft, per-frame pixel faults, effects and scaling: three sources from the owner, three web tracks, and five experiments on the field-test rogue. The notes and experiments live outside this repository.
+
+| Source | Adopted | Not universalized |
+| --- | --- | --- |
+| [xccds: Pixel Art Book](https://github.com/xccds/pixel-art-book) (owner) | Craft rules as measurable checks (run lengths, L-corners, value separation); scripts list pixel faults, the eye judges structure | Its numeric thresholds as pass marks |
+| [Colorify resize docs](https://comeixalpha.github.io/docs/universal_params/resize) (owner) | Nearest neighbor for enlarging pixel art; averaging filters only as an intermediate when shrinking | Its image-to-block-art mapping |
+| [xxwywzy: pixel art tutorial part 1](https://xxwywzy.github.io/2019/06/22/pixel-1/) (owner) | Introductory; covered by the other sources | |
+| [Saint11: Pixel Art Tutorials](https://saint11.art/blog/pixel-art-tutorials/) | Redraw rather than rescale; outlines cost space at small sizes; dark-then-white effect onset; dissolve order; no wind-up frame on player attacks | Card frame counts and timings |
+| [Lospec: Pixel Art Outlines](https://lospec.com/articles/pixel-art-outlines/), [Pixel Parmesan: Resolution](https://pixelparmesan.com/choosing-the-right-resolution-for-your-pixel-art/) | Outlines for contrast, colored outlines from the adjacent ramp; the smallest necessary detail sets resolution | Lit-side outline lightening or broken outlines on unknown backgrounds |
+| [McGuire & Gagiu: MMPX](https://jcgt.org/published/0010/02/04/), [Scale2x](https://www.scale2x.it/) | Scale2x stays the default export enlargement (owner's choice), with nearest neighbor on request and MMPX as an option that keeps fists and tips that EPX rounds; either filter as a draft for a finer grid | Treating a filtered export as added detail |
+| [unfake.js](https://github.com/jenissimo/unfake.js), [PixelOE](https://github.com/KohakuBlueleaf/PixelOE), [OKLab](https://bottosson.github.io/posts/oklab/) | Grid recovery for generated pixel-look images; protected roles win the block vote; perceptual matching within a material ramp | Learned pixelization (heavy, license limits); averaging samplers |
+
+Experiments: a recolor-only pass removed L-corners from a rotated boot without changing its silhouette. Automatic compression of a generated guide recovered its grid (about 6.31 px per cell), but the reduction to the target was only a draft; protected-role voting left fewer orphan pixels than a plain majority. A port of the paper's MMPX listing, whose EPX path reproduced the delivered Scale2x frames exactly, kept a 3×4 fist and blade tips that Scale2x rounded.
+
 ## Public skill structures inspected
 
 | Source | Adopt | Reject / constrain |

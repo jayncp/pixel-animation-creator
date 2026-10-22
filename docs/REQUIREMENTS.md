@@ -4,7 +4,8 @@
 | --- | --- | --- |
 | Full pipeline, arbitrary entry | SKILL + stages-and-entry + project record (resume-or-new) | Field test entering at views from a pixel image |
 | Text / ordinary / pixel references | character-design input branches | Text smoke test; other branches documented |
-| Default 256×256 or user size | entrypoint default, user override and existing-project rule | Field-test and visual test dimensions |
+| Pixel grid set by the reference (user size, otherwise a 256×256 canvas); canvas follows the action; export is an integer scale (Scale2x by default, nearest neighbor on request) | entrypoint rule, pixel-scale reference, existing-project rule | Field-test dimensions; the owner's scale definition (2026-10-22) |
+| Natural outlines, color and per-frame detail; compressing and adding detail | pixel-art-spec, motion-design (rig cleanup, effect construction), pixel-scale | Research pass with experiments on the field-test character (outside this repository) |
 | Image generation / Codex / selected provider | tool-adapters capability and permission branches | Local discovery/help + adapter dry-run; live external APIs not tested |
 | Multi-view refs, clean edges/palette, identity | character-design + pixel-art-spec + visual gates | Primary tutorial research; actual universal multiview success not claimed |
 | Unlimited action frames, rhythm | motion-design and no fixed drawing cap | Existing exporter timing regressions; new-action generalization not claimed |

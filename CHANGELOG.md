@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.0.1 — 2026-10-22
+
+From a research pass on pixel detail (outline and color craft, per-frame faults, effects, scaling) with experiments on the field-test rogue, and the owner's definition of scale.
+
+- Scale terms, used throughout and gathered in a new `pixel-scale` reference:
+  - the reference sets the character's pixel grid, one cell per pixel (the user's pixel reference or size, otherwise a 256×256 canvas);
+  - animation canvases change with the content while the character keeps its grid;
+  - export is an integer scale of the finished frames that leaves the grid unchanged;
+  - a finer or coarser grid is redrawn.
+- Export enlargement: Scale2x by default (Scale3x for 3×, Scale2x twice for 4×), nearest neighbor when the user asks for a direct export, MMPX as an option that keeps small shapes; copies are made from the reviewed 1× frames and the method is recorded. A color-preserving 2× can also draft a finer grid.
+- README: a section listing the defaults, the choices and when to declare them.
+- Compressing: recover a generated image's own (often noninteger) grid, cut out first, scale by landmarks, let protected roles (outlines, pupils) win the block vote instead of a plain majority, match colors perceptually within a material ramp, then redraw.
+- Pixel craft: the outline strategy is read from the source and applied to new parts, copies and effect edges; L-corners and run rhythm; inward AA; value and color; faces and hands; quick readability tests.
+- Motion:
+  - after rotating parts, a recolor-only pass removes L-corners; offsets snap to whole pixels; long holds use 0/45/90° or drawn variants;
+  - typical effect construction: ramp, onset, lifecycle, dissolve order, edges, light, particles;
+  - sub-pixel motion; player attacks without a wind-up frame.
+- Checks: scripts list pixel-level suspects and the eye judges structure; static parts keep identical pixels between frames.
+- Delivery and record: the 1× frames are the master and export-scale copies are made from them; the project record and final index carry grid, canvas and export scale (`pixel_grid`, `canvas`, `export_scale` replace `current_working_canvas`); the index notes one-sided parts if a game mirrors the sprite.
+
 ## 3.0.0 — 2026-10-21
 
 From a fifth field test, run by two agents in parallel from the same seed. The rogue charges, two afterimages split off, and the body and then each afterimage dash through one point before the body recovers. This closes the series of dagger-skill tests on this character, mostly melee (2.2.0–3.0.0). The next series tests ranged skills.
